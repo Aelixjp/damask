@@ -1,0 +1,50 @@
+.cardHeader{
+    color: white;
+    background: #5c0cd0;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+}
+
+.menuTitle{
+    font-family: 'Pacifico', cursive;
+    color: white;
+}
+
+.menuTitleCont{
+    text-decoration: none;
+}
+
+.avatarImg > i{
+    font-size: 30px;
+}
+
+.nav-link{
+    color: lightgrey;
+    transition: all .2s linear;
+}
+
+.nav-link:hover{
+    color: white;
+    transition: all .2s linear;
+}
+
+.avatarUsername{
+    font-family: 'Roboto', sans-serif;
+}
+
+.searchBar{
+    max-width: 300px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: none;
+}
+
+.contAvatar{
+    right: 3em;
+}
+
+.w-40{
+    width: 40%;
+}

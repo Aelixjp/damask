@@ -1,0 +1,15 @@
+.contentBody{
+    height: calc(100% - 62.4px);
+}
+
+.bg-side{
+    background: rgb(228, 228, 228);
+}
+
+.card-title-min{
+    font-size: 16px;
+}
+
+.card{
+    height: 100%;
+}
