@@ -2,6 +2,7 @@
 
     require_once "../globals/globals.php";
     require_once "../back/validations/security.php";
+    require_once "../back/validations/check_authenticated.php";
 
     setlocale(LC_MONETARY, 'es_CO');
 
@@ -110,11 +111,15 @@
         <link rel="stylesheet" href="<?= LIBRARIES_URL_LOCAL; ?>/bootstrap-icons/font/bootstrap-icons.css">
         <link rel="stylesheet" href="styles.css">
 
+        <script type="module" src="main.js"></script>
+
         <title>Articles</title>
     </head>
 
     <body class = "bg-light position-relative d-block w-100 h-100">
         <?php require_once "../headers/menu.php"; ?>
+
+        <?php require_once "../components/menu_side/menu_side.php"; ?>
 
         <div class="container-fluid contentBody px-0">
             <div class="row w-100 h-100">

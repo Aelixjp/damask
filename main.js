@@ -1,3 +1,18 @@
+FormData.prototype.toURL = function()
+{
+    let buildURL = ""; let i = 0;
+
+    for(const entry of this.entries())
+    {
+        buildURL += i != 0 ? "&" : "?";
+        buildURL += `${entry[0]}=${entry[1]}`;
+
+        i++;
+    }
+
+    return buildURL;
+}
+
 $(document).ready(() =>{
     const formLogin   = $("#formLogin"  );
     const btnLogin    = $("#btnLogin"   );
@@ -39,18 +54,3 @@ $(document).ready(() =>{
     .fail(e => console.error(e.responseText));
 
 });
-
-FormData.prototype.toURL = function()
-{
-    let buildURL = ""; let i = 0;
-
-    for(const entry of this.entries())
-    {
-        buildURL += i != 0 ? "&" : "?";
-        buildURL += `${entry[0]}=${entry[1]}`;
-
-        i++;
-    }
-
-    return buildURL;
-}

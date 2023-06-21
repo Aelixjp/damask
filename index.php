@@ -19,7 +19,7 @@
                     <div class="d-inline-block mx-5 form-top-extra">
                         <h1 class="mainTitle mb-3">Damask</h1>
 
-                        <p class="titleLegend mb-3">Busca productos de tu interes rapidamente en tus tiendas favoritas!</p>
+                        <p class="titleLegend mb-3">Busca y compara productos de tu interes rapidamente en tus tiendas favoritas!</p>
     
                         <form id = "formLogin" action="back/validations/login.php" class="w-100 bg-form form-log form-top"
                         method="POST">

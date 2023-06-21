@@ -25,11 +25,11 @@
             <div class="d-flex align-items-center justify-content-center position-absolute contAvatar">
                 <span class="avatarUsername mx-4"><?= $_SESSION["name"]; ?></span>
 
-                <div class="avatarImg d-inline-block">
+                <div id = "avatarImg" class="avatarImg d-inline-block">
                     <i class="bi bi-person-circle"></i>
                 </div>
 
-                <div class="displayMenuIcon d-none ms-3">
+                <div id = "displayMenuIcon" class="displayMenuIcon d-none ms-3">
                     <i class="bi bi-list"></i>
                 </div>
             </div>

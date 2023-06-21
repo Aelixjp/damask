@@ -11,7 +11,8 @@
     if(empty(trim($username)) || empty(trim($password)))
     {
         $msg = "Porfavor rellene todos los campos!";
-    }else
+    }
+    else
     {
         $q = $conn -> prepare("SELECT * FROM users WHERE username = ? AND password = ?");
 
