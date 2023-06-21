@@ -41,10 +41,29 @@
     border-right: none;
 }
 
+.contAvatar:hover
+{
+    cursor: pointer;
+}
+
 .contAvatar{
     right: 3em;
 }
 
+.contAvatar i
+{
+    font-size: 30px;
+}
+
 .w-40{
     width: 40%;
+}
+
+@media screen and (max-width: 546px) {
+    
+    .displayMenuIcon
+    {
+        display: inline-block !important;
+    }
+
 }

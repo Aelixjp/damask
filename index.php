@@ -15,7 +15,7 @@
     <body class="d-block w-100 h-100">
         <div class="container-fluid d-block w-100 h-100">
             <div class="row h-100">
-                <div class="col-md-5 h-100 d-flex flex-column justify-content-start bg-light border-marine">
+                <div class="container-login col-md-5 d-flex flex-column justify-content-start bg-light border-marine">
                     <div class="d-inline-block mx-5 form-top-extra">
                         <h1 class="mainTitle mb-3">Damask</h1>
 
@@ -40,7 +40,7 @@
                                     <a href="" class="recover-p">Olvidaste tu Contraseña?, Pincha aqui!</a>
                                 </div>
 
-                                <div class="form-group text-center mt-4 mb-1">
+                                <div class="form-group text-center mt-4 mb-4">
                                     <button id = "btnLogin" type="submit" class="btn btn-submit-login mt-2">Login</button>
                                 </div>
                             </div>

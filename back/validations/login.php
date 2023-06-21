@@ -25,21 +25,22 @@
             if(sizeof($data) <= 0)
             {
                 $msg = "Inicio de sesión invalido!";
-            }else
+            }
+            else
             {
                 $dt = $data[0];
 
                 $_SESSION["name"    ] = $dt["name"];
                 $_SESSION["username"] = $dt["username"];
 
-                echo "<script>window.location = '../../articles';</script>";
+                header('Location: ../../articles');
             }
         }
     }
 
     if(!empty($msg))
     {
-        echo "<script>alert('$msg'); window.location = '../../index.html';</script>";
+        echo "<script>alert('$msg'); window.location = '../../';</script>";
     }
 
 ?>

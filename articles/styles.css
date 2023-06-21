@@ -1,9 +1,19 @@
+.navbar
+{
+    position: fixed;
+    width: 100%;
+    z-index: 10000;
+}
+
 .contentBody{
     height: calc(100% - 62.4px);
 }
 
 .bg-side{
     background: rgb(228, 228, 228);
+    position: fixed;
+    top: 57px;
+    overflow-y: scroll;
 }
 
 .card-title-min{
@@ -12,4 +22,83 @@
 
 .card{
     height: 100%;
+}
+
+.container_articles
+{
+    position: absolute;
+    float: right;
+    right: 0;
+    top: 57px;
+    width: calc(100% - 24%);
+    z-index: 0;
+}
+
+@media screen and (max-width: 768px) {
+    
+    .bg-side
+    {
+        width: 38% !important;
+    }
+
+    .container_articles
+    {
+        width: 63% !important;
+    }
+
+    .bussinessCardBody .col
+    {
+        width: 50% !important;
+    }
+
+}
+
+@media screen and (max-width: 675px)
+{
+
+    .bg-side
+    {
+        display: none;
+    }
+
+    .container_articles
+    {
+        width: 100% !important;
+    }
+
+}
+
+@media screen and (max-width: 546px)
+{
+
+    .avatarUsername
+    {
+        display: none;
+    }
+
+    .bussinessCardBody .col
+    {
+        margin-left: auto;
+        margin-right: auto;
+        width: 80% !important;
+    }
+
+}
+
+@media screen and (max-width: 480px) {
+    
+    .bussinessCardBody .col
+    {
+        width: 94% !important;
+    }
+
+}
+
+@media screen and (max-width: 420px){
+    
+    .bussinessCardBody .col
+    {
+        width: 100% !important;
+    }
+
 }

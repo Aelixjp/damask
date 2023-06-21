@@ -153,14 +153,14 @@
 
                 </aside>
 
-                <div class="col-md-9">
+                <div class="col-md-9 container_articles">
 
 
                     <div class="col-md-12 bussinessCardF h-100">
                         
-                        <div class = "bussinessCardBody p-4">
+                        <div class = "container-fluid bussinessCardBody py-4 px-3">
 
-                            <div class="row row-cols-1 row-cols-md-2 row-cols-md-3 row-cols-md-4 g-4">
+                            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
                                 
                                 <?php foreach($resData as $dt): ?>
                                     <?php
