@@ -92,8 +92,6 @@
             }
         ]');
 
-    
-
 ?>
 
 <!DOCTYPE html>
@@ -122,25 +120,37 @@
         <div class="container-fluid contentBody px-0">
             <div class="row w-100 h-100">
                 <aside class="col-md-3 h-100 bg-side p-4">
+                    <!-- INPUT PRODUCTO -->
                     <div class="form-group">
                         <label for="buscarProducto">Buscar Producto</label>
                         <input type="text" class="form-control" id="buscarProducto" aria-describedby="emailHelp" placeholder="Producto...">
                     </div>
 
+                    <!-- INPUT PRECIO MINIMO -->
                     <div class="form-group">
                         <label for="minPrecio">Precio minimo:</label>
                         <input type="number" class = "form-control" name="minPrecio" id="minPrecio" aria-describedby="minPrecio"
                         min = "0" placeholder = "Minimo...">
                     </div>
 
+                    <!-- INPUT PRECIO MAXIMO -->
                     <div class="form-group">
                         <label for="maxPrice">Precio maximo:</label>
                         <input type="number" class = "form-control" name="maxPrice" id="maxPrice" aria-describedby="maxPrice"
                         min = "0" placeholder = "Maximo...">
                     </div>
 
+                    <!-- INPUT CANTIDAD PRODUCTOS -->
+                    <div class="form-group">
+                        <label for="searchSize">Cantidad Filtrar:</label>
+                        <input id = "searchSize" type="number" class = "form-control" name="searchSize" aria-describedby="searchSize"
+                        min = "20" value = "20" placeholder = "Cantidad Filtrar...">
+                    </div>
+
                     <div class="form-group">
                         <label for="commerceType">E commerce:</label>
+
+                        <!-- SELECT E-COMMERCE-->
                         <select name="commerceType" id="commerceType" class = "form-select">
                             <option value="0">Seleccione e-commerce...</option>
 
@@ -151,20 +161,16 @@
                     </div>
 
                     <div class="form-group text-center mt-5">
-                        <button type = "button" class = "btn btn-primary">Filtrar</button>
+                        <!-- BOTON FILTRAR -->
+                        <button id = "btnFiltrar" type = "button" class = "btn btn-primary">Filtrar</button>
                     </div>
 
                 </aside>
 
                 <div class="col-md-9 container_articles">
-
-
                     <div class="col-md-12 bussinessCardF h-100">
-                        
                         <div class = "container-fluid bussinessCardBody py-4 px-3">
-
-                            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
-                                
+                            <div id = "contCards" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
                                 <?php foreach($resData as $dt): ?>
                                     <?php
                                     
@@ -178,6 +184,10 @@
 
                                     <div class="col">
                                         <div class="card">
+                                            <div class = "cardHead bg-primary">
+                                                <p class = "cardHeadTitle">Mercadolibre</p>
+                                            </div>
+
                                             <a href = "<?= $url; ?>" target = "blank">
                                                 <img src="<?= $imgURL; ?>" class="card-img-top" alt="...">
                                             </a>
@@ -192,18 +202,11 @@
                                         </div>
                                     </div>
                                 <?php endforeach;?>
-                                
                             </div>
-
-
                         </div>
-
                     </div>
-
-
                 </div>
             </div>
-
         </div>
     </body>
 </html>

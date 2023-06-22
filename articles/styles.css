@@ -22,6 +22,8 @@
 
 .card{
     height: 100%;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 }
 
 .container_articles
@@ -32,6 +34,24 @@
     top: 57px;
     width: calc(100% - 24%);
     z-index: 0;
+}
+
+.cardHead
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.cardHead .cardHeadTitle
+{
+    color: #fff;
+    font-size: 17px;
+    text-align: center;
+    margin: 8px auto;
 }
 
 @media screen and (max-width: 768px) {
