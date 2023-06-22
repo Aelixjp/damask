@@ -2,6 +2,7 @@
 
     class MenuSideController
     {
+        function __construct(){}
 
         const APP_NAME = "/damask";
 
@@ -23,8 +24,6 @@
                 "icon" => "bi bi-box-arrow-in-left"
             ]
         ];
-
-        function __construct(){}
 
         function renderMenuRoutes()
         {

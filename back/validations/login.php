@@ -1,47 +1,53 @@
 <?php
-    session_start();
 
-    require_once "../connection/connection.php";
+    if(session_status() == PHP_SESSION_NONE)
+        session_start();
 
-    $msg = "";
+    header("Access-Control-Allow-Methods: POST");
+    header("Access-Control-Allow-Origin: localhost");
+    header("Content-Type: application/json; charset=utf-8");
 
-    $username = isset($_POST["username"]) ? $_POST["username"] : "";
-    $password = isset($_POST["password"]) ? $_POST["password"] : ""; 
+    require_once __DIR__ . "/../connection/connection.php";
+    require_once __DIR__ . "/../utils/utils.php";
+    require_once __DIR__ . "/../classes/response.php";
+    require_once __DIR__  . "/../validations/filterValidator.php";
 
-    if(empty(trim($username)) || empty(trim($password)))
+    $resp = new Response();
+
+    if($_SERVER["REQUEST_METHOD"] == "POST")
     {
-        $msg = "Porfavor rellene todos los campos!";
-    }
-    else
-    {
-        $q = $conn -> prepare("SELECT * FROM users WHERE username = ? AND password = ?");
-
-        if(!$q->execute([$username, $password]))
+        if(!isset($_POST["username"]) || !isset($_POST["password"]))
+            $resp->setMsg("No se ha enviado información para el login!");
+        else if(empty(trim($_POST["username"])) || empty(trim($_POST["password"])))
+            $resp->setMsg("Hay campos vacios porfavor verifique!");
+        else
         {
-            $msg = "Ha ocurrido un error al comprobar sus credenciales de inicio!";
-        }else
-        {
-            $data = $q->fetchAll(PDO::FETCH_ASSOC);
+            $fv = new FilterValidator();
 
-            if(sizeof($data) <= 0)
-            {
-                $msg = "Inicio de sesión invalido!";
-            }
+            $username = $fv->strictFilterString($_POST["username"]);
+            $password = $fv->filterString($_POST["password"]);
+
+            $resAuth = checkAuthenticatedInDb($conn, $username, $password);
+            
+            if(!$resAuth || empty($resAuth))
+                $resp->setMsg("Inicio de sesión invalido!");
             else
             {
-                $dt = $data[0];
+                $sessData = $resAuth[0];
 
-                $_SESSION["name"    ] = $dt["name"];
-                $_SESSION["username"] = $dt["username"];
+                $_SESSION["ID"] = $sessData["ID"];
+                $_SESSION["name"] = $sessData["name"];
+                $_SESSION["username"] = $sessData["username"];
 
-                header('Location: ../../articles');
+                $resp->setStatus(true)->setMsg("OK");
             }
         }
-    }
 
-    if(!empty($msg))
-    {
-        echo "<script>alert('$msg'); window.location = '../../';</script>";
+        
     }
+    else
+        $resp->setMsg("Metodo de petición no permitido!");
+
+    $resp->send();
 
 ?>

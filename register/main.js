@@ -2,22 +2,28 @@ import { checkPasswords } from "../globals/utils/utils.js";
 
 $(document).ready (() => {
 
+    const btnLogin = $("#btnLogin");
+    const inputName = $("#inpName");
     const inputUsuario  = $("#inpUsername");
     const inputPassword = $("#inpPassword");
     const inputPasswordConf = $("#inpPasswordConf");
 
     const endpoint = "http://localhost/damask/back/register/register.php";
 
-    $("#btnLogin").click(() => {
+    $(window).on("keyup", ev => {
+        if(ev.keyCode == 13)
+            btnLogin.click();
+    });
 
-        const usuario = inputUsuario.val() || "";
+    btnLogin.click(() => {
+
+        const name = inputName.val() || "";
+        const username = inputUsuario.val() || "";
         const password = inputPassword.val() || "";
         const passwordConf = inputPasswordConf.val() || "";
 
-        const body = new FormData();
-
         //Comprobamos que el usuario haya enviado información
-        if(usuario.trim() === "" || password.trim() === "" || passwordConf.trim() === "")
+        if(name.trim() === "" || username.trim() === "" || password.trim() === "" || passwordConf.trim() === "")
             alert("Hay campos vacios porfavor verifique!");
         else if(password != passwordConf)
             alert("Las contraseñas no coinciden!");
@@ -28,16 +34,27 @@ $(document).ready (() => {
             );
         else
         {
+            const body = new FormData();
+
+            body.append("name", name);
+            body.append("username", username);
+            body.append("password", password);
+            body.append("passwordConf", passwordConf);
+
             $.ajax(endpoint, {
-                body,
+                data: body,
                 method: "POST",
                 contentType: false,
                 processData: false
             })
             .done(d => {
-                console.log(d);
+                if(!d.status)
+                    alert(d.msg);
+                else
+                    location.href = "/damask/articles/";
             })
             .catch(e => {
+                console.log(e);
                 console.log(e.message);
             });
         }

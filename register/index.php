@@ -9,6 +9,8 @@
         <?php require_once "../globals/globals.php"; ?>
         <?php require_once "../globals/links/links.php"; ?>
 
+        <link rel="stylesheet" href="styles.css">
+
         <script type="module" src="main.js"></script>
     </head>
     
@@ -26,6 +28,12 @@
                             <div class="cardHeader px-3 py-3">Registro</div>
 
                             <div class="cardBody p-4">
+                                 <!-- INPUT NAME  -->
+                                 <div class="form-group">
+                                    <label for="name">Nombre</label>
+                                    <input id = "inpName" name="name" type="text" class="form-control" required>
+                                </div>
+
                                 <!-- INPUT USUARIO  -->
                                 <div class="form-group">
                                     <label for="usuario">Usuario</label>

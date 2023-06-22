@@ -21,7 +21,7 @@
 
                         <p class="titleLegend mb-3">Busca y compara productos de tu interes rapidamente en tus tiendas favoritas!</p>
     
-                        <form id = "formLogin" action="back/validations/login.php" class="w-100 bg-form form-log form-top"
+                        <form id = "formLogin" action="" class="w-100 bg-form form-log form-top"
                         method="POST">
                             <div class="cardHeader px-3 py-3">Iniciar sesión</div>
 
@@ -41,7 +41,7 @@
                                 </div>
 
                                 <div class="form-group text-center mt-4 mb-4">
-                                    <button id = "btnLogin" type="submit" class="btn btn-submit-login mt-2">Login</button>
+                                    <button id = "btnLogin" type="button" class="btn btn-submit-login mt-2">Login</button>
                                 </div>
                             </div>
                         </form>

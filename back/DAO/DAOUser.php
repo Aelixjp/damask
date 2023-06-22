@@ -82,11 +82,11 @@
 
             try {
                 $resp = $this->CRUD->CREATE("users", "name, username, password", $name, $username, $password);
+
+                if($resp->getStatus())
+                    $resp->setMsg("Usuario creado con exito!");
             } catch (\Throwable $th) {
                 $resp = new Response();
-
-                print_r($th->getMessage());
-
                 $resp->setMsg("El usuario ya existe!");
             }
 
