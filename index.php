@@ -37,7 +37,7 @@
                                 </div>
 
                                 <div class="form-group text-center">
-                                    <a href="" class="recover-p">Olvidaste tu Contraseña?, Pincha aqui!</a>
+                                    <a href="/damask/register" class="recover-p">Aún no tienes cuenta?, Registrate Aquí!</a>
                                 </div>
 
                                 <div class="form-group text-center mt-4 mb-4">

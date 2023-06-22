@@ -20,7 +20,4 @@
 	//Conexion de la base de datos
 	$conn = conectar(...DATOS_CONEXION);
 
-	if(!$conn)
-		echo "no hay conexion!";
-
 ?>
