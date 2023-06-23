@@ -81,8 +81,6 @@ $(document).ready(() => {
             const result = await scrapper.buscarProductoConFiltros(...params);
             const data = result.data;
 
-            console.log(result);
-
             const html = generateHTMLCards(data);
 
             contCards.html(html);

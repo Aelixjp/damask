@@ -10,7 +10,10 @@
         private string $username;
         private string $password; 
 
-        function __construct(){}
+        function __construct()
+        {
+            parent::__construct();
+        }
 
         /********************************** GETTERS Y SETTERS **********************************/
         public function getID() : int
@@ -79,11 +82,6 @@
                 "password" => $this->password,
                 "username" => $this->username
             ];
-        }
-
-        public function serialize($serializeData) : string
-        {   
-            return json_encode($serializeData);
         }
 
     }

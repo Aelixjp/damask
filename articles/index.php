@@ -1,6 +1,7 @@
 <?php
     require_once "../globals/globals.php";
     require_once "../back/validations/security.php";
+    require_once "../back/pages/pages.php";
 
     setlocale(LC_MONETARY, 'es_CO');
 
@@ -142,7 +143,7 @@
 
                     <!-- INPUT CANTIDAD PRODUCTOS -->
                     <div class="form-group">
-                        <label for="searchSize">Cantidad Filtrar:</label>
+                        <label for="searchSize">Cantidad Filtrar por E-COMMERCE:</label>
                         <input id = "searchSize" type="number" class = "form-control" name="searchSize" aria-describedby="searchSize"
                         min = "20" value = "20" placeholder = "Cantidad Filtrar...">
                     </div>
@@ -154,9 +155,17 @@
                         <select name="commerceType" id="commerceType" class = "form-select">
                             <option value="0">Seleccione e-commerce...</option>
 
-                            <option value="1">Amazon</option>
-                            <option value="2">Aliexpress</option>
-                            <option value="3">Mercadolibre</option>
+                            <?php foreach(getPages() as $page): ?>
+                                <?php
+                                    $id = $page["ID"];
+                                    $nombre = $page["nombre"];
+                                    $status = $page["status"];
+                                ?>
+
+                                <?php if ($status): ?>
+                                    <option value = "<?= $id; ?>"><?= $nombre; ?></option>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
                         </select>
                     </div>
 

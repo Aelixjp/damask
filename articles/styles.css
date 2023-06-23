@@ -111,6 +111,15 @@
     margin: 8px auto;
 }
 
+@media screen and (max-width: 1600px) {
+
+    .bussinessCardBody .col
+    {
+        width: 32% !important;
+    }
+
+}
+
 @media screen and (max-width: 768px) {
     
     .bg-side

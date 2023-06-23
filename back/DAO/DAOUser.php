@@ -7,7 +7,8 @@
 
     class DAOUser
     {
-        private $conn;
+        private string $tb = "users";
+        private PDO $conn;
 
         function __construct(PDO $conn)
         {
@@ -19,11 +20,9 @@
         {
             $resp = new ExtendedResponse();
 
-            $userQuery = $this->CRUD->READ("*", "users", "ID = ?", 1);
+            $userQuery = $this->CRUD->READ("*", $this->tb, "ID = ?", 1);
 
             if(!$userQuery->getStatus())
-                return $userQuery;
-            else if(empty($userQuery->getData()))
                 return $userQuery;
             else
             {
@@ -48,11 +47,9 @@
         {
             $resp = new ExtendedResponse();
 
-            $userQuery = $this->CRUD->READ("*", "users");
+            $userQuery = $this->CRUD->READ("*", $this->tb);
 
             if(!$userQuery->getStatus())
-                return $userQuery;
-            else if(empty($userQuery->getData()))
                 return $userQuery;
             else
             {
@@ -81,7 +78,7 @@
             $data = $user->toAssocArrayWithPass(); unset($data["ID"]); extract($data);
 
             try {
-                $resp = $this->CRUD->CREATE("users", "name, username, password", $name, $username, $password);
+                $resp = $this->CRUD->CREATE($this->tb, "name, username, password", $name, $username, $password);
 
                 if($resp->getStatus())
                     $resp->setMsg("Usuario creado con exito!");
