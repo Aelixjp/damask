@@ -24,6 +24,63 @@
     height: 100%;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.card-title
+{
+    margin-bottom: 1.5em;
+}
+
+.card a
+{
+    text-align: center;
+}
+
+.card a img
+{
+    width: auto;
+    max-height: 250px;
+    max-width: calc(100% - 32px);
+}
+
+.containerCardFooter
+{
+    display: flex;
+    align-items: flex-end;
+    width: calc(100% - 32px);
+}
+
+.containerCardFooter div
+{
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.priceSection
+{
+    width: 50%;
+}
+
+.cardBtnsSection
+{
+    display: flex !important;
+    justify-content: flex-end;
+    align-items: flex-end;
+    width: 40%;
+}
+
+.cardBtnsSection button
+{
+    margin-left: 6px;
+}
+
+.fixedBottom
+{
+    position: absolute;
+    bottom: 18px;
 }
 
 .container_articles

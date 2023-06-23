@@ -195,9 +195,25 @@
                                             <div class="card-body">
                                                 <h5 class="card-title card-title-min"><?= $title; ?></h5>
                                                
-                                                <button type = "button" class = "btn btn-primary mt-3">
-                                                    $ <?= number_format($price, 2); ?>
-                                                </button>
+                                                <div class="containerCardFooter fixedBottom">
+                                                    <!-- Boton de precio -->
+                                                    <div class="priceSection">
+                                                        <button type = "button" class = "btn btn-primary mt-3">
+                                                            $ <?= number_format($price, 2); ?>
+                                                        </button>
+                                                    </div>
+
+                                                    <!-- Botones adicionales de funciones para cada tarjeta  -->
+                                                    <div class="cardBtnsSection">
+                                                        <button class = "btn btn-warning" type = "button">
+                                                            <i class="bi bi-star text-white"></i>
+                                                        </button>
+
+                                                        <button class = "btn btn-danger" type = "button">
+                                                            <i class="bi bi-arrow-left-right text-white"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
