@@ -50,6 +50,33 @@
             return $resp;
         }
 
+        function READCustom(string $customQuery, ...$values) : Response | ExtendedResponse
+        {
+            $resp = new ExtendedResponse();
+
+            $query = $this->conn->prepare($customQuery);
+
+            if(!$query->execute($values))
+            {
+                $resp = new Response();
+
+                $resp->setMsg("Ha ocurrido un error al ejecutar la consulta!");
+            }
+            else
+            {
+                $respData = $query->fetchAll(PDO::FETCH_ASSOC);
+
+                $resp->setStatus(true)->setData($respData);
+
+                if(empty($respData))
+                    $resp->setMsg("No hay coincidencias!");
+                else
+                    $resp->setMsg("OK");
+            }
+
+            return $resp;
+        }
+
         function READ($fields = "*", $tb, $where_cond = false, ...$where_cond_vals) : Response | ExtendedResponse
         {
             $resp = new ExtendedResponse();

@@ -85,7 +85,41 @@
         {
             $resp = new ExtendedResponse();
 
-            $query = $this->CRUD->READ("*", $this->tb, "ID_usuario = ?", $userID);
+
+            /**
+             * ID_usuario
+             * ID_pagina
+             * ID_producto
+             * name_user
+             * username,
+             * e_commerce,
+             * url_e_commerce,
+             * url_articulo,
+             * e_commerce_status,
+             * nombre_producto,
+             * 
+            */
+
+            $customQuery = "SELECT
+                users.ID as ID_usuario,
+                paginas.ID as ID_pagina,
+                articulos_guardados.ID as ID_producto,
+                users.name as name_user,
+                users.username,
+                paginas.nombre as e_commerce,
+                paginas.url as url_e_commerce,
+                articulos_guardados.url as url_articulo,
+                paginas.status as e_commerce_status,
+                articulos_guardados.nombre_producto,
+                articulos_guardados.imagen_producto,
+                articulos_guardados.precio_producto,
+                articulos_guardados.resena_producto
+            FROM articulos_guardados
+                LEFT JOIN users ON users.ID = articulos_guardados.ID
+                LEFT JOIN paginas ON paginas.ID = articulos_guardados.ID_pagina 
+            WHERE users.ID = ? ORDER BY articulos_guardados.ID";
+
+            $query = $this->CRUD->READCustom($customQuery, $userID);
 
             if(!$query->getStatus())
             {
@@ -95,16 +129,15 @@
             }
             else
             {
-                foreach($query->getData() as $user)
+                foreach($query->getData() as $product)
                 {
-                    $user_e = new User(); extract($user);
+                    $user = new User();
+                    $pagina = new Pagina();
+                    $product_e = new Product();
 
-                    $user_e->setID($ID)
-                           ->setName($name)
-                           ->setUsername($username)
-                           ->setPassword($password);
 
-                    $resp->pushData($user_e->toAssocArray());
+
+                    $resp->pushData($product_e->toAssocArray());
                 }
             }
         }
