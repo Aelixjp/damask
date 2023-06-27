@@ -34,12 +34,12 @@
             return $this;
         }
 
-        public function getUsuario() : User
+        public function getUser() : User
         {
             return $this->usuario;
         }
 
-        public function setUsuario(User $usuario)
+        public function setUser(User $usuario)
         {
             $this->usuario = $usuario;
 
@@ -124,6 +124,19 @@
             return [
                 "ID" => $this->ID,
                 "usuario" => $this->usuario->toAssocArray(),
+                "url" => $this->url,
+                "nombre_producto" => $this->nombre_producto,
+                "imagen_producto" => $this->imagen_producto,
+                "precio_producto" => $this->precio_producto,
+                "pagina" => $this->pagina->toAssocArray(),
+                "resena_producto" => $this->resena_producto
+            ];
+        }
+
+        public function toAssocArrayWithoutUser() : array
+        {
+            return [
+                "ID" => $this->ID,
                 "url" => $this->url,
                 "nombre_producto" => $this->nombre_producto,
                 "imagen_producto" => $this->imagen_producto,

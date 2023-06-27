@@ -14,7 +14,7 @@
                 "icon" => "bi bi-house-door-fill"
             ],
             [
-                "url" => MenuSideController::APP_NAME . "/back/articles/my_articles.php",
+                "url" => MenuSideController::APP_NAME . "/products",
                 "title" => "Mis Articulos",
                 "icon" => "bi bi-bag-heart"
             ],

@@ -93,6 +93,8 @@
             }
         ]');
 
+    $id_usr = $_SESSION["ID"];
+
 ?>
 
 <!DOCTYPE html>
@@ -117,6 +119,8 @@
         <?php require_once "../headers/menu.php"; ?>
 
         <?php require_once "../components/menu_side/menu_side.php"; ?>
+
+        <input type="number" name="usr_id" id="usr_id" value="<?= $id_usr; ?>" style="display: none;">
 
         <div class="container-fluid contentBody px-0">
             <div class="row w-100 h-100">

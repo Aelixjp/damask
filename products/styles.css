@@ -1,0 +1,226 @@
+.navbar
+{
+    position: fixed;
+    width: 100%;
+    z-index: 10000;
+    top: 0;
+}
+
+.contentBody{
+    height: calc(100% - 62.4px);
+}
+
+.bg-side{
+    background: rgb(228, 228, 228);
+    position: fixed;
+    top: 57px;
+    overflow-y: scroll;
+}
+
+.card-title-min{
+    font-size: 16px;
+}
+
+.card{
+    height: 100%;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.card-title
+{
+    margin-bottom: 1.5em;
+}
+
+.card a
+{
+    text-align: center;
+}
+
+.card a img
+{
+    width: auto;
+    max-height: 250px;
+    max-width: calc(100% - 32px);
+}
+
+.containerCardFooter
+{
+    display: flex;
+    align-items: flex-end;
+    width: calc(100% - 32px);
+}
+
+.containerCardFooter div
+{
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
+.priceSection
+{
+    width: 50%;
+}
+
+.cardBtnsSection
+{
+    display: flex !important;
+    justify-content: flex-end;
+    align-items: flex-end;
+    width: 40%;
+}
+
+.cardBtnsSection button
+{
+    margin-left: 6px;
+}
+
+.fixedBottom
+{
+    position: absolute;
+    bottom: 18px;
+}
+
+.container_articles
+{
+    position: absolute;
+    float: right;
+    right: 0;
+    top: 57px;
+    width: calc(100% - 24%);
+    z-index: 0;
+}
+
+.cardHead
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.cardHead .cardHeadTitle
+{
+    color: #fff;
+    font-size: 17px;
+    text-align: center;
+    margin: 8px auto;
+}
+
+.main_content
+{
+    margin-top: 60px;
+}
+
+.main_content > .row
+{
+    margin-top: 90px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.title_articles
+{
+    font-family: 'Heebo', sans-serif;
+    text-decoration: none;
+    font-size: 2.6em;
+    font-style: italic;
+    margin-bottom: 25px;
+}
+
+.content-articulos
+{
+    width: 96%;
+    background: rgb(232, 232, 232);
+}
+
+.product_review
+{
+    text-align: justify;
+    margin-bottom: 30px;
+}
+
+@media screen and (max-width: 1600px) {
+
+    .bussinessCardBody .col
+    {
+        width: 32% !important;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+    
+    .bg-side
+    {
+        width: 38% !important;
+    }
+
+    .container_articles
+    {
+        width: 63% !important;
+    }
+
+    .bussinessCardBody .col
+    {
+        width: 50% !important;
+    }
+
+}
+
+@media screen and (max-width: 675px)
+{
+
+    .bg-side
+    {
+        display: none;
+    }
+
+    .container_articles
+    {
+        width: 100% !important;
+    }
+
+}
+
+@media screen and (max-width: 546px)
+{
+
+    .avatarUsername, #avatarImg
+    {
+        display: none !important;
+    }
+
+    .bussinessCardBody .col
+    {
+        margin-left: auto;
+        margin-right: auto;
+        width: 80% !important;
+    }
+
+}
+
+@media screen and (max-width: 480px) {
+    
+    .bussinessCardBody .col
+    {
+        width: 94% !important;
+    }
+
+}
+
+@media screen and (max-width: 420px){
+    
+    .bussinessCardBody .col
+    {
+        width: 100% !important;
+    }
+
+}
