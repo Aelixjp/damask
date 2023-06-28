@@ -1,9 +1,10 @@
-import { checkPasswords } from "../globals/utils/utils.js";
+import { checkEmail, checkPasswords } from "../globals/utils/utils.js";
 
 $(document).ready (() => {
 
     const btnLogin = $("#btnLogin");
     const inputName = $("#inpName");
+    const inputEmail = $("#inpCorreo");
     const inputUsuario  = $("#inpUsername");
     const inputPassword = $("#inpPassword");
     const inputPasswordConf = $("#inpPasswordConf");
@@ -18,13 +19,22 @@ $(document).ready (() => {
     btnLogin.click(() => {
 
         const name = inputName.val() || "";
+        const email = inputEmail.val() || "";
         const username = inputUsuario.val() || "";
         const password = inputPassword.val() || "";
         const passwordConf = inputPasswordConf.val() || "";
 
         //Comprobamos que el usuario haya enviado información
-        if(name.trim() === "" || username.trim() === "" || password.trim() === "" || passwordConf.trim() === "")
+        if(
+            name.trim()         === "" ||
+            email.trim()        === "" ||
+            username.trim()     === "" || 
+            password.trim()     === "" || 
+            passwordConf.trim() === ""
+        )
             alert("Hay campos vacios porfavor verifique!");
+        else if(!checkEmail(email))
+            alert("El correo electronico no es valido!");
         else if(password != passwordConf)
             alert("Las contraseñas no coinciden!");
         else if(!checkPasswords(password, passwordConf))
@@ -37,6 +47,7 @@ $(document).ready (() => {
             const body = new FormData();
 
             body.append("name", name);
+            body.append("email", email);
             body.append("username", username);
             body.append("password", password);
             body.append("passwordConf", passwordConf);

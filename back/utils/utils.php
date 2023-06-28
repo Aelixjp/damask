@@ -32,4 +32,9 @@
         return false;
     }
 
+    function generateUUIDToken()
+    {
+        return md5(strval(hrtime(true)));
+    }
+
 ?>

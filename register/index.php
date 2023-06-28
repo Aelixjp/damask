@@ -39,6 +39,12 @@
                                     <label for="usuario">Usuario</label>
                                     <input id = "inpUsername" name="username" type="text" class="form-control" required>
                                 </div>
+
+                                <!-- INPUT CORREO  -->
+                                <div class="form-group">
+                                    <label for="correo">Correo</label>
+                                    <input id = "inpCorreo" name="correo" type="email" class="form-control" required>
+                                </div>
     
                                 <!-- INPUT CONTRASEÑA  -->
                                 <div class="form-group">

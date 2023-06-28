@@ -1,0 +1,187 @@
+.bussinessCard{
+    background: url("https://10empresa.com/wp-content/uploads/2019/06/estrategia-de-negocios-1280x720.jpg");
+
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    position: fixed;
+    right: 0;
+}
+
+.mainTitle{
+    font-family: 'Pacifico', cursive;
+}
+
+.bg-form{
+    background: #11998e;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #38ef7d, #11998e);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #38ef7d, #11998e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    background: none;
+    background: white;
+
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.input-group{
+    margin-bottom: 20px;
+}
+
+.input-group:last-child{
+    margin-bottom: 0;
+}
+
+.bg-marine{
+    background: aquamarine;
+}
+
+.border-marine{
+    border-right: 17px solid aquamarine;
+}
+
+.cardHeader{
+    color: white;
+    background: #5c0cd0;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
+}
+
+.form-group{
+    margin-bottom: 20px;
+}
+
+.form-group > label, .recover-p{
+    color: grey;
+    font-size: 12px;
+    margin-bottom: 6px;
+}
+
+.form-log{
+    box-shadow: 0px 3px 3px lightgray;
+    border-radius: 10px !important;
+    border-top-left-radius: 6px !important;
+    border-top-right-radius: 6px !important;
+}
+
+.form-top{
+    margin-top: 100px;
+}
+
+.form-top-extra{
+    margin-top: 150px;
+}
+
+.btn-submit-login{
+    background: #27c18e;
+    transition: all .2s linear;
+    color: white;
+}
+
+.btn-submit-login:hover{
+    color: white;
+    background: #2cd99f;
+    transition: all .2s linear;
+}
+
+h1{
+    text-decoration: underline;
+}
+
+@media screen and (max-width: 1520px)
+{
+
+    .form-top-extra
+    {
+        margin-left: 20px !important;
+        margin-right: 20px !important;
+    }
+
+}
+
+@media screen and (max-width: 1494px) {
+    
+    .form-top-extra
+    {
+        margin-left: 15px !important;
+        margin-right: 15px !important;
+    }
+
+}
+
+@media screen and (max-width: 1346px) {
+    
+    .form-log
+    {
+        margin-top: 50px;
+    }
+
+    .form-top-extra
+    {
+        margin-top: 75px;
+        margin-left: 15px !important;
+        margin-right: 15px !important;
+    }
+
+}
+
+@media screen and (max-width: 1154px) {
+    
+    .container-login
+    {
+        width: 50%;
+        z-index: 10000;
+    }
+
+}
+
+@media screen and (max-width: 960px) {
+    
+    .form-log
+    {
+        margin-top: 60px !important;
+    }
+
+    .container-login
+    {
+        width: 57%;
+    }
+
+}
+
+@media screen and (max-width: 880px) {
+
+    .container-login
+    {
+        padding-left: 15px;
+        padding-right: 12px;
+        width: 100%;
+    }
+
+}
+
+@media screen and (max-width: 576px) {
+
+    .form-top-extra
+    {
+        margin-top: 65px;
+        padding-left: 0;
+        padding-right: 0px;
+    }
+
+    .form-log
+    {
+        margin-top: 40px !important;
+        height: 80% !important;
+    }
+
+    .btn-submit-login
+    {
+        width: 100%;
+        margin-top: 40px !important;
+    }
+
+}

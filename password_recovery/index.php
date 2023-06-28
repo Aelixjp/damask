@@ -4,10 +4,10 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Login</title>
+        <title>Recuperar Cuenta</title>
 
-        <?php require_once "globals/globals.php"; ?>
-        <?php require_once "globals/links/links.php"; ?>
+        <?php require_once "../globals/globals.php"; ?>
+        <?php require_once "../globals/links/links.php"; ?>
 
         <script type="module" src="main.js"></script>
     </head>
@@ -21,31 +21,23 @@
 
                         <p class="titleLegend mb-3">Busca y compara productos de tu interes rapidamente en tus tiendas favoritas!</p>
     
-                        <form id = "formLogin" action="" class="w-100 bg-form form-log form-top"
+                        <form id = "formRecoverPassword" action="" class="w-100 bg-form form-log form-top"
                         method="POST">
-                            <div class="cardHeader px-3 py-3">Iniciar sesión</div>
+                            <div class="cardHeader px-3 py-3">Recuperar Cuenta</div>
 
                             <div class="cardBody p-4">
                                 <div class="form-group">
                                     <label for="usuario">Usuario</label>
                                     <input id = "inpUsername" name="username" type="text" class="form-control" required>
                                 </div>
-    
-                                <div class="form-group">
-                                    <label for="password">Contraseña</label>
-                                    <input id = "inpPassword" name="password" type="password" class="form-control" required>
+
+                                <div class="form-group d-flex justify-content-around">
+                                    <a href="/damask/register/" class="recover-p">Deseas registrarte?, Registrate Aqui!</a>
+                                    <a href="/damask/" class="recover-p">Ya posees acceso?, Inicia Sesión Aqui!</a>
                                 </div>
 
-                                <div class="form-group text-center">
-                                    <a href="/damask/register" class="recover-p">Aún no tienes cuenta?, Registrate Aquí!</a>
-                                </div>
-
-                                <div class="form-group text-center">
-                                    <a href="/damask/password_recovery" class="recover-p">Olvidaste tu cuenta?, Recuperala Aquí!</a>
-                                </div>
-
-                                <div class="form-group text-center mt-4 mb-4">
-                                    <button id = "btnLogin" type="button" class="btn btn-submit-login mt-2">Login</button>
+                                <div class="form-group text-center mt-4 mb-3">
+                                    <button id = "btnRecoverPass" type="button" class="btn btn-submit-login mt-2">Enviar</button>
                                 </div>
                             </div>
                         </form>
