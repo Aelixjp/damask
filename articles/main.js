@@ -1,5 +1,6 @@
 import MenuComponent from "../components/menu_side/main.js";
 import Scrapper from "../classes/Scrapper.js";
+import { serverHost } from "../globals/utils/utils.js";
 
 $(document).ready(() => {
     const contCards = $("#contCards");
@@ -97,7 +98,7 @@ $(document).ready(() => {
         
         if(cardContainer)
         {
-            const endpoint = "http://localhost/damask/back/products/products.php";
+            const endpoint = `http://${serverHost}/damask/back/products/products.php`;
 
             const pageLink = $(cardContainer.find("a")[0]);
             const articleTitle = $(cardContainer.find("div.card-body > h5")[0]);

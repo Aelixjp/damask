@@ -1,3 +1,5 @@
+import { serverHost } from "../globals/utils/utils.js";
+
 FormData.prototype.toURL = function()
 {
     let buildURL = ""; let i = 0;
@@ -18,7 +20,7 @@ export default class Scrapper
 
     constructor()
     {
-        this.endpoint = "http://localhost:8081/damask/api";
+        this.endpoint = `http://${serverHost}:8081/damask/api`;
     }
 
     buscarProductoConFiltros = (action, ecommerce, name, minPrice, maxPrice, searchSize = 20) =>

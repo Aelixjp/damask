@@ -4,7 +4,7 @@
 
     class ExtendedResponse extends Response
     {
-        private $data;
+        private $data = [];
 
         function __construct()
         {

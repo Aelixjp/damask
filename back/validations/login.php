@@ -4,7 +4,7 @@
         session_start();
 
     header("Access-Control-Allow-Methods: POST");
-    header("Access-Control-Allow-Origin: localhost");
+    header("Access-Control-Allow-Origin: *");
     header("Content-Type: application/json; charset=utf-8");
 
     require_once __DIR__ . "/../connection/connection.php";

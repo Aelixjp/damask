@@ -1,3 +1,5 @@
+export const serverHost = "192.168.0.11";
+
 export function checkSecurePassword(password)
 {
     /*

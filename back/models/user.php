@@ -7,6 +7,7 @@
     {
         private int $ID = 0;
         private string $name;
+        private string $email;
         private string $username;
         private string $password; 
 
@@ -36,6 +37,18 @@
         public function setName(string $name)
         {
             $this->name = $name;
+
+            return $this;
+        }
+
+        public function getEmail() : string
+        {
+            return $this->email;
+        }
+
+        public function setEmail(string $email)
+        {
+            $this->email = $email;
 
             return $this;
         }
@@ -70,6 +83,7 @@
             return [
                 "ID" => $this->ID,
                 "name" => $this->name,
+                "email" => $this->email,
                 "username" => $this->username
             ];
         }
@@ -79,6 +93,7 @@
             return [
                 "ID" => $this->ID,
                 "name" => $this->name,
+                "email" => $this->email,
                 "password" => $this->password,
                 "username" => $this->username
             ];

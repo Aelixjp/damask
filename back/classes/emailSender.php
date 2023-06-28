@@ -119,6 +119,8 @@
 
                 if($resultadoCorreoEnviado)
                 {
+                    $resp->setStatus(true);
+                    
                     $resp->setMsg(
                         "Se le ha enviado un correo electronico para cambiar su contraseña " .
                         "porfavor verifique su bandeja de entrada y spam!"

@@ -31,9 +31,12 @@
                                     <input id = "inpUsername" name="username" type="text" class="form-control" required>
                                 </div>
 
-                                <div class="form-group d-flex justify-content-around">
-                                    <a href="/damask/register/" class="recover-p">Deseas registrarte?, Registrate Aqui!</a>
+                                <div class="form-group text-center">
                                     <a href="/damask/" class="recover-p">Ya posees acceso?, Inicia Sesión Aqui!</a>
+                                </div>
+
+                                <div class="form-group text-center">
+                                    <a href="/damask/register/" class="recover-p">Deseas registrarte?, Registrate Aqui!</a>
                                 </div>
 
                                 <div class="form-group text-center mt-4 mb-3">

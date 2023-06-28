@@ -1,4 +1,4 @@
-import { checkEmail, checkPasswords } from "../globals/utils/utils.js";
+import { checkEmail, checkPasswords, serverHost } from "../globals/utils/utils.js";
 
 $(document).ready (() => {
 
@@ -9,7 +9,7 @@ $(document).ready (() => {
     const inputPassword = $("#inpPassword");
     const inputPasswordConf = $("#inpPasswordConf");
 
-    const endpoint = "http://localhost/damask/back/register/register.php";
+    const endpoint = `http://${serverHost}/damask/back/register/register.php`;
 
     $(window).on("keyup", ev => {
         if(ev.keyCode == 13)

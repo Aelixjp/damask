@@ -1,3 +1,5 @@
+import { serverHost } from "./globals/utils/utils.js";
+
 $(document).ready(() => {
     const formLogin   = $("#formLogin"  );
     const btnLogin    = $("#btnLogin"   );
@@ -15,7 +17,7 @@ $(document).ready(() => {
         else
         {
             $.ajax({
-                url: "http://localhost/damask/back/validations/login.php",
+                url: `http://${serverHost}/damask/back/validations/login.php`,
                 method: "POST",
                 data: formLogin.serialize()
             })

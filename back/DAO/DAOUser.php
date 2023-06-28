@@ -20,7 +20,7 @@
         {
             $resp = new ExtendedResponse();
 
-            $userQuery = $this->CRUD->READ("*", $this->tb, "ID = ?", 1);
+            $userQuery = $this->CRUD->READ("*", $this->tb, "ID = ?", $ID);
 
             if(!$userQuery->getStatus())
                 return $userQuery;
@@ -32,8 +32,38 @@
                     
                 $user->setID($ID)
                      ->setName($name)
+                     ->setEmail($email)
                      ->setUsername($username)
                      ->setPassword($password);
+                        
+                $resp->setMsg("OK")
+                     ->setStatus(true)
+                     ->setData($user);
+            }
+
+            return $resp;
+        }
+
+        public function getUserByUsername(string $username) : Response | ExtendedResponse
+        {
+            $resp = new ExtendedResponse();
+
+            $userQuery = $this->CRUD->READ(
+                "ID, name, email, username", $this->tb, "username = ?", $username
+            );
+
+            if(!$userQuery->getStatus())
+                return $userQuery;
+            else
+            {
+                $user = new User();
+
+                $usr = $userQuery->getData()[0]; extract($usr);
+                    
+                $user->setID($ID)
+                     ->setName($name)
+                     ->setEmail($email)
+                     ->setUsername($username);
                         
                 $resp->setMsg("OK")
                      ->setStatus(true)
@@ -58,6 +88,7 @@
                     $user_e = new User(); extract($user);
 
                     $user_e->setID($ID)
+                           ->setEmail($email)
                            ->setName($name)
                            ->setUsername($username)
                            ->setPassword($password);
@@ -78,7 +109,9 @@
             $data = $user->toAssocArrayWithPass(); unset($data["ID"]); extract($data);
 
             try {
-                $resp = $this->CRUD->CREATE($this->tb, "name, username, password", $name, $username, $password);
+                $resp = $this->CRUD->CREATE(
+                    $this->tb, "name, email, username, password", $name, $email, $username, $password
+                );
 
                 if($resp->getStatus())
                     $resp->setMsg("Usuario creado con exito!");

@@ -17,13 +17,13 @@
     if($_SERVER["REQUEST_METHOD"] == "POST")
     {
         if(
-            !isset($_POST["name"]) || !isset($_POST["username"]) ||
+            !isset($_POST["name"]) || !isset($_POST["username"]) || !isset($_POST["email"]) ||
             !isset($_POST["password"]) || !isset($_POST["passwordConf"])
         ){
             $resp->setMsg("Se ha omitido informacion necesaria para crear un usuario!");
         }
         else if(
-            empty($_POST["name"]) || empty($_POST["username"]) || 
+            empty($_POST["name"]) || empty($_POST["username"]) || empty($_POST["email"]) ||
             empty($_POST["password"]) || empty($_POST["passwordConf"])
         )
             $resp->setMsg("Hay campos vacios, por favor compruebe!");
@@ -34,20 +34,20 @@
             $filter = new FilterValidator();
 
             $name     = $filter->strictFilterString($_POST["name"]);
+            $email    = $filter->filterEmail($_POST["email"]);
             $username = $filter->strictFilterString($_POST["username"]);
             $password = $filter->filterString($_POST["password"]);
             $passwordConf = $filter->filterString($_POST["passwordConf"]);
 
             if($password != $passwordConf)
-            {
                 $resp->setMsg("Las contraseñas no coinciden!");
-            }
             else
             {
                 //La contraseña debe ir hasheada con el algoritmo md5, de acuerdo a la base de datos
                 $password_conf = hash("SHA512", $passwordConf);
                 
                 $user->setName($name)
+                     ->setEmail($email)
                      ->setUsername($username)
                      ->setPassword($password_conf);
 
