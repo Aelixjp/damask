@@ -12,4 +12,6 @@
     define("LIBRARIES_URL"      , APP_URL   . "/" . "libraries");
     define("LIBRARIES_URL_LOCAL", APP_LOCAL . "/" . "libraries");
 
+    $serverHost = "192.168.0.11";
+
 ?>

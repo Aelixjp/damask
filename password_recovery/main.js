@@ -1,7 +1,9 @@
+import { serverHost } from "../globals/utils/utils.js";
+
 $(document).ready(() => {
-    const formRecoverPassword = $("#formRecoverPassword");
-    const btnRecoverPass    = $("#btnRecoverPass"   );
     const inpUsername = $("#inpUsername");
+    const btnRecoverPass = $("#btnRecoverPass"   );
+    const formRecoverPassword = $("#formRecoverPassword");
 
     $(window).on("keyup", ev => {
         if(ev.keyCode == 13)
@@ -14,15 +16,12 @@ $(document).ready(() => {
         else
         {
             $.ajax({
-                url: "http://localhost/damask/back/validations/recover_password.php",
+                url: `http://${serverHost}/damask/back/validations/recover_password.php`,
                 method: "POST",
                 data: formRecoverPassword.serialize()
             })
             .done(d => {
-                if(!d.status)
-                    alert(d.msg);
-                else
-                    location.href = "/damask/";
+                alert(d.msg);
             })
             .fail(e => {
                 console.log(e);

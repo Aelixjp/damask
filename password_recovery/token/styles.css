@@ -1,15 +1,48 @@
-.bussinessCard{
-    background: url("https://10empresa.com/wp-content/uploads/2019/06/estrategia-de-negocios-1280x720.jpg");
+.container-login
+{
+    width: 100%;
+    height: 100%;
+    z-index: 100000;
+    position: relative;
+}
 
+.container-login::before
+{
+    content: "";
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    filter: brightness(.35);
+    background: url("https://10empresa.com/wp-content/uploads/2019/06/estrategia-de-negocios-1280x720.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
-    position: fixed;
-    right: 0;
+}
+
+.header_translucid
+{
+    /*border-radius: 6px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);*/
+}
+
+.form-group label
+{
+    font-size: 16px !important;
+    color: rgb(61, 61, 61) !important;
+}
+
+.titleLegend
+{
+    color: rgb(247, 247, 247);
 }
 
 .mainTitle{
+    font-size: 3em;
+    color: rgb(247, 247, 247);
     font-family: 'Pacifico', cursive;
 }
 
@@ -41,13 +74,53 @@
     border-right: 17px solid aquamarine;
 }
 
-.cardHeader{
+.cardHeader, .cardHeaderError{
     color: white;
     background: #5c0cd0;
     font-family: 'Roboto', sans-serif;
     font-size: 18px;
     border-top-right-radius: 6px;
     border-top-left-radius: 6px;
+}
+
+.cardBody
+{
+    position: relative;
+    max-width: 542px;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+.cardBodyError
+{
+    min-height: 200px;
+}
+
+.emptyTokenContainer
+{
+    margin-top: 60px;
+}
+
+.cardHeaderError
+{
+    background: crimson !important;
+}
+
+.cardBody
+{
+    margin: 0 auto;
+    text-align: justify;
+    background: white;
+}
+
+.btnError
+{
+    left: calc(50% - 58px);
+    display: block;
+    bottom: 40px;
+    position: absolute;
+    font-weight: bold;
+    padding: 10px 20px;
 }
 
 .form-group{
@@ -61,19 +134,19 @@
 }
 
 .form-log{
-    margin-top: 30px;
-    box-shadow: 0px 3px 3px lightgray;
+    margin-top: 40px;
+    box-shadow: 0px 3px 3px rgb(74, 74, 74);
     border-radius: 10px !important;
     border-top-left-radius: 6px !important;
     border-top-right-radius: 6px !important;
 }
 
 .form-top{
-    margin-top: 40px;
+    margin-top: 60px;
 }
 
 .form-top-extra{
-    margin-top: 45px;
+    margin-top: 50px;
 }
 
 .btn-submit-login{
@@ -86,6 +159,13 @@
     color: white;
     background: #2cd99f;
     transition: all .2s linear;
+}
+
+.btn-submit-login
+{
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+    padding: 10px 40px;
 }
 
 h1{
@@ -117,7 +197,7 @@ h1{
     
     .form-log
     {
-        margin-top: 30px;
+        margin-top: 15px;
     }
 
     .form-top-extra
@@ -133,7 +213,7 @@ h1{
     
     .container-login
     {
-        width: 50%;
+        width: 100%;
         z-index: 10000;
     }
 
@@ -143,12 +223,12 @@ h1{
     
     .form-log
     {
-        margin-top: 30px !important;
+        margin-top: 15px !important;
     }
 
     .container-login
     {
-        width: 57%;
+        width: 100%;
     }
 
 }
@@ -175,7 +255,7 @@ h1{
 
     .form-log
     {
-        margin-top: 30px !important;
+        margin-top: 15px !important;
         height: 80% !important;
     }
 

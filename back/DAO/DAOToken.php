@@ -44,6 +44,40 @@
             return $resp;
         }
 
+        public function getToken(string $token)
+        {
+            $resp = new ExtendedResponse();
+
+            $tokenQuery = $this->CRUD->READ("*", $this->tb, "token = ?", $token);
+
+            if(!$tokenQuery->getStatus())
+            {
+                return $tokenQuery;
+            }
+            else if(empty($tokenQuery->getData()))
+            {
+                $resp = new Response();
+
+                $resp->setMsg("El token no existe o ha expirado!");
+            }
+            else
+            {
+                $emailToken = new EmailToken();
+
+                $tok = $tokenQuery->getData()[0]; extract($tok);
+                    
+                $emailToken->setID($ID)
+                           ->setEmail($email)
+                           ->setToken($token);
+                        
+                $resp->setMsg("OK")
+                     ->setStatus(true)
+                     ->setData($emailToken);
+            }
+
+            return $resp;
+        }
+
         public function getTokenByEmail(string $email) : Response | ExtendedResponse
         {
             $resp = new ExtendedResponse();

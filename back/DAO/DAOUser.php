@@ -54,6 +54,12 @@
 
             if(!$userQuery->getStatus())
                 return $userQuery;
+            else if(empty($userQuery->getData()))
+            {
+                $resp = new Response();
+
+                $resp->setMsg("El usuario no existe!");
+            }
             else
             {
                 $user = new User();

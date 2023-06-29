@@ -1,14 +1,15 @@
 <?php
 
     require_once __DIR__ . "/response.php";
+    require_once __DIR__ . "/../../globals/globals.php";
     require_once __DIR__ . "/../utils/utils.php";
     require_once __DIR__ . "/../validations/filterValidator.php";
     require_once __DIR__ . "/email_html_templates/password_recovery.php";
 
+    define("RECOVERY_URL", "http://$serverHost/damask/password_recovery/token/");
+
     class EmailSender
     {
-        protected const RECOVERY_URL = "http://localhost/damask/back/operations/password_recovery/password_recover.php";
-
         private string $name = "Damask Admin";
         private string $from = "admdmsk1234@hotmail.com";
 
@@ -93,7 +94,7 @@
 
         public function fillAndGetRecoveryPasswordTemplate(string $usuario, $token) : string
         {
-            $tokenURL = EmailSender::RECOVERY_URL . "?token=$token";
+            $tokenURL = RECOVERY_URL . "?token=$token";
 
             $this->htmlMsg = getPassRecoveryTemplate($usuario, $tokenURL);
 
