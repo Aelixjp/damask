@@ -41,7 +41,7 @@
                 <h1 class="title_articles">Mis Articulos</h1>
             </div>
 
-            <div class="container-fluid content-articulos mx-auto text-center rounded">
+            <div id = "container-articulos" class="container-fluid content-articulos mx-auto text-center rounded">
                 <div class="row p-4">
                     <?php foreach($user_products->getData() as $usr_product): ?>
                         <?php
@@ -84,7 +84,7 @@
 
                                         <!-- Botones adicionales de funciones para cada tarjeta  -->
                                         <div class="cardBtnsSection">
-                                            <button class = "btn btn-warning" type = "button">
+                                            <button class = "btn btn-warning btn-my-articles" type = "button">
                                                 <i class="bi bi-star-fill text-white"></i>
                                             </button>
 

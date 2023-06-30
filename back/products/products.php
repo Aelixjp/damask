@@ -1,5 +1,6 @@
 <?php
     header("Access-Control-Allow-Origin: localhost");
+    header("Access-Control-Allow-Methods: POST, DELETE");
 
     require_once __DIR__ . "/../connection/connection.php";
     require_once __DIR__ . "/../DAO/DAOProduct.php";
@@ -36,7 +37,9 @@
         return $daoProduct->addUserProduct($productData);
     }
 
-    if($_SERVER["REQUEST_METHOD"] === "POST")
+    if(!($_SERVER["REQUEST_METHOD"] === "POST" || $_SERVER["REQUEST_METHOD"] === "DELETE"))
+        $resp->setMsg("Metodo de petición no valido!");
+    else if($_SERVER["REQUEST_METHOD"] === "POST")
     {
         header("Content-Type: application/json;charset=utf-8");
 
@@ -106,6 +109,39 @@
 
                     $resp->setMsg("Accion desconocida!");
                     break;
+            }
+        }
+
+        $resp->send();
+    }
+    else if($_SERVER["REQUEST_METHOD"] === "DELETE")
+    {
+        header("Content-Type: application/json;charset=utf-8");
+        parse_str(file_get_contents("php://input"), $_DELETE);
+        
+        $resp = new Response();
+
+        if(!isset($_DELETE["id"]))
+            $resp->setMsg("Producto a eliminar no especificado!");
+        else if(empty($_DELETE["id"]))
+            $resp->setMsg("Producto a eliminar no especificado!");
+        else
+        {
+            $id = filter_var($_DELETE["id"], FILTER_SANITIZE_NUMBER_INT);
+
+            if(!$id)
+                $resp->setMsg("Valor no valido!");
+            else
+            {
+                $resp = $daoProduct->deleteUserProduct($id);
+
+                if(!$resp->getStatus())
+                    $resp->setMsg("Ha ocurrido un error al eliminar el producto!");
+                else
+                {
+                    $resp->setStatus(true);
+                    $resp->setMsg("Eliminado de favoritos con exito!");
+                }
             }
         }
 

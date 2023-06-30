@@ -190,6 +190,11 @@
             return $resp;
         }
 
+        public function deleteUserProduct(int $id) : Response
+        {
+            return $this->CRUD->DELETE($this->tb, "ID = ?", $id);
+        }
+
     }
 
 ?>
