@@ -128,6 +128,15 @@
             return $resp;
         }
 
+        public function deleteTokensByEmail(string $email) : Response
+        {
+            $resp = new Response();
+
+            $delQuery = $this->CRUD->DELETE($this->tb, "email = ?", $email);
+
+            return $delQuery;
+        }
+
     }
 
 ?>

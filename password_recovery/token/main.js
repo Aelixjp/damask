@@ -1,9 +1,10 @@
 import { serverHost, checkPasswords } from "../../globals/utils/utils.js";
 
 $(document).ready(() => {
-    const btnRecover      = $("#btnRecoverPass" );
-    const inpPassword     = $("#inpPassword"    );
-    const inpPasswordConf = $("#inpPasswordConf");
+    const btnRecover      = $("#btnRecoverPass"     );
+    const inpPassword     = $("#inpPassword"        );
+    const inpPasswordConf = $("#inpPasswordConf"    );
+    const formRecoverPass = $("#formRecoverPassword");
 
     $(window).on("keyup", ev => {
         if(ev.keyCode == 13)
@@ -25,21 +26,19 @@ $(document).ready(() => {
             );
         else
         {
-            const data = new FormData();
-
-            data.append("password", password);
-            data.append("passwordConf", passwordConf);
+            const urlParams = new URLSearchParams(document.location.search);
+            const token = urlParams.get("token");
 
             $.ajax({
-                url: `http://${serverHost}/damask/back/validations/login.php`,
-                method: "PUT",
-                data,
-                contentType: false,
-                processData: false
+                url: `http://${serverHost}/damask/back/validations/recover_password.php`,
+                type: "PUT",
+                data: formRecoverPass.serialize() + `&token=${encodeURIComponent(token)}`
             })
             .done(d => {
-                if(!d.status)
-                    alert(d.msg);
+                alert(d.msg);
+
+                if(d.status)
+                    location.href = "/damask/";
             })
             .fail(e => {
                 console.log(e);

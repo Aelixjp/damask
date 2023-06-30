@@ -12,6 +12,18 @@
 
     $fv = new FilterValidator();
     $resp = new Response();
+    $daoUser = new DAOUser($conn);
+    $daoToken = new DAOToken($conn);
+
+    function checkValidToken(string $token)
+    {
+        global $conn;
+        global $daoToken;
+
+        $tokenDT = $daoToken->getToken($token);
+
+        return $tokenDT;
+    }
 
     if(!($_SERVER["REQUEST_METHOD"] == "POST" || $_SERVER["REQUEST_METHOD"] == "PUT"))
         $resp->setMsg("Metodo de petición no valido!");
@@ -32,8 +44,6 @@
                 $resp = $userInfo;
             else
             {
-                $daoToken = new DAOToken($conn);
-
                 $user = $userInfo->getData();
                 $name = $fv->strictFilterString($user->getName());
                 $email = $fv->filterEmail($user->getEmail());
@@ -57,6 +67,8 @@
     }
     else if($_SERVER["REQUEST_METHOD"] == "PUT")
     {
+        parse_str(file_get_contents("php://input"), $_PUT); 
+
         if(!isset($_PUT["password"]) || !isset($_PUT["passwordConf"]))
             $resp->setMsg("Todos los campos son obligatorios!");
         else if(empty(trim($_PUT["password"])) || empty(trim($_PUT["passwordConf"])))
@@ -66,17 +78,35 @@
         else if(!isset($_PUT["token"]))
             $resp->setMsg("Token de autenticación no enviado!");
         else if(empty(trim($_PUT["token"])))
-            $resp->setMsg("Token de autenticación no enviado!");
+            $resp->setMsg("Token de autenticación vacio!");
         else
         {
             $token = $fv->strictFilterString($_PUT["token"]);
-            $password = $fv->filterString($_PUT["password"]);
-            $passwordConf = $fv->filterString($_PUT["passwordConf"]);
+            $tokenDT = checkValidToken($token);
 
-            //La contraseña debe ir hasheada con el algoritmo md5, de acuerdo a la base de datos
-            $password_conf = hash("SHA512", $passwordConf);
+            if(!$tokenDT->getStatus())
+                $resp = $tokenDT;
+            else if(empty($tokenDT->getData()))
+                $resp = $tokenDT;
+            else
+            {
+                $email = $fv->filterEmail($tokenDT->getData()->getEmail());
+                $password = $fv->filterString($_PUT["password"]);
+                $passwordConf = $fv->filterString($_PUT["passwordConf"]);
 
-            
+                //La contraseña debe ir hasheada con el algoritmo md5, de acuerdo a la base de datos
+                $password_conf = hash("SHA512", $passwordConf);
+                $tokensDeleted = $daoToken->deleteTokensByEmail($email);
+                $passwordChanged = $daoUser->updatePasswordByEmail($email, $password_conf);
+
+                if(!$passwordChanged->getStatus())
+                    $resp->setMsg("Ha ocurrido un error!, no ha sido posible cambiar la contraseña!");
+                else
+                {
+                    $resp->setStatus(true);
+                    $resp->setMsg("Contraseña actualizada con exito!");
+                }
+            }
         }
     }
 

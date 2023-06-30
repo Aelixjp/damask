@@ -129,6 +129,15 @@
             return $resp;
         }
 
+        public function updatePasswordByEmail(string $email, string $password) : Response
+        {
+            $resp = new Response();
+
+            $updateQuery = $this->CRUD->UPDATE($this->tb, "password = ?", "email = ?", $password, $email);
+
+            return $updateQuery;
+        }
+
     }
 
 ?>
