@@ -21,13 +21,15 @@ $(document).ready(() => {
         let html = "";
 
         cards.forEach(({ url, imgURL, title, price, pageID }) => {
+            const ecommerce  = pageID > 0 ? $(inpEcommerce.children()[pageID]).text() : "";
             const formatter = new Intl.NumberFormat('es-CO');
             const f_price = formatter.format(price);
+            const cardColor = pageID == 1 ? "bg-primary" : pageID == 2 ? "bg-danger" : "bg-warning";
 
             html += `<div class="col">
                 <div page-id = "${pageID}" class="card card_listener">
-                    <div class = "cardHead bg-primary">
-                        <p class = "cardHeadTitle">Mercadolibre</p>
+                    <div class = "cardHead ${cardColor}">
+                        <p class = "cardHeadTitle">${ecommerce}</p>
                     </div>
 
                     <a href = "${url}" target = "blank">
@@ -147,21 +149,31 @@ $(document).ready(() => {
 
     async function filterProducts()
     {
-        const ecommerce  = inpEcommerce.val();
+        const ecommerceIndex = inpEcommerce[0].selectedIndex;
+        
+        const pageID     = inpEcommerce.val();
+        const instanceID = usrIdInput.val();
+        const ecommerce  = pageID > 0 ? $(inpEcommerce.children()[ecommerceIndex]).text() : "";
         const producto   = inpProducto.val();
         const minPrice   = inpMinPrecio.val() | 0;
         const maxPrice   = inpMaxPrecio.val() | 0;
         const searchSize = inpSearchSize.val();
 
-        if(ecommerce == 0)
+        if(pageID == 0)
         {
             alert("Seleccione primero un e-commerce!");
         }
+        else if(!instanceID || instanceID == 0)
+        {
+            alert("Su sesion ha expirado, porfavor vuelva a iniciar sesion!")
+        }
         else
         {
-            const params = ["search-product", ecommerce, producto, minPrice, maxPrice, searchSize];
+            const params = ["search-product", pageID, instanceID, ecommerce, producto, minPrice, maxPrice, searchSize];
             const result = await scrapper.buscarProductoConFiltros(...params);
             const data = result.data;
+
+            console.log(result);
 
             const html = generateHTMLCards(data);
 

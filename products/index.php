@@ -7,6 +7,12 @@
     $id_usr = $_SESSION["ID"];
     $user_products = getUserProducts($id_usr);
 
+    $colors = [
+        "bg-primary",
+        "bg-danger",
+        "bg-warning"
+    ];
+
     setlocale(LC_MONETARY, 'es_CO');
 
 ?>
@@ -59,7 +65,7 @@
                         ?>
                         <div class="col-sm-3 mb-3">
                             <div id = "product_<?= $product_id ?>" class="card">
-                                <div class = "cardHead bg-primary">
+                                <div class = "cardHead <?= $colors[$page_id - 1]; ?>">
                                     <p page-id = "<?= $page_id ?>" class = "cardHeadTitle"><?= $page_name ?></p>
                                 </div>
 
