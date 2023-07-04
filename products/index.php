@@ -105,7 +105,6 @@
                     <?php endforeach; ?>
                 </div>
             </div>
-            
         </section>
     </body>
 </html>

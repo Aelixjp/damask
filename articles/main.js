@@ -1,20 +1,26 @@
 import MenuComponent from "../components/menu_side/main.js";
+import LoadingComponent from "../components/loader/main.js";
 import Scrapper from "../classes/Scrapper.js";
-import { serverHost } from "../globals/utils/utils.js";
+import { convertCurrency, serverHost } from "../globals/utils/utils.js";
 
 $(document).ready(() => {
-    const contCards = $("#contCards");
-    const profileAvatar = $("#avatarImg");
-    const inpProducto = $("#buscarProducto");
-    const inpMinPrecio = $("#minPrecio");
-    const inpMaxPrecio = $("#maxPrice");
-    const inpSearchSize = $("#searchSize");
-    const inpEcommerce = $("#commerceType");
-    const inpBtnFiltrar = $("#btnFiltrar");
-    const usrIdInput = $("#usr_id");
+    const options          = $("#containerHeaderBtns");
+    const contCards        = $("#contCards"          );
+    const usrIdInput       = $("#usr_id"             );
+    const inpProducto      = $("#buscarProducto"     );
+    const inpMinPrecio     = $("#minPrecio"          );
+    const inpMaxPrecio     = $("#maxPrice"           );
+    const inpEcommerce     = $("#commerceType"       );
+    const inpSearchSize    = $("#searchSize"         );
+    const profileAvatar    = $("#avatarImg"          );
+    const inpBtnFiltrar    = $("#btnFiltrar"         );
+    const noDisplayContent = $("#noDisplayContent"   );
 
     const menu = new MenuComponent();
+    const loading = new LoadingComponent();
     const scrapper = new Scrapper();
+
+    let compList = [];
 
     function generateHTMLCards(cards)
     {
@@ -22,9 +28,9 @@ $(document).ready(() => {
 
         cards.forEach(({ url, imgURL, title, price, pageID }) => {
             const ecommerce  = pageID > 0 ? $(inpEcommerce.children()[pageID]).text() : "";
-            const formatter = new Intl.NumberFormat('es-CO');
-            const f_price = formatter.format(price);
-            const cardColor = pageID == 1 ? "bg-primary" : pageID == 2 ? "bg-danger" : "bg-warning";
+            const formatter  = new Intl.NumberFormat('es-CO');
+            const f_price    = formatter.format(price);
+            const cardColor  = pageID == 1 ? "bg-primary" : pageID == 2 ? "bg-danger" : "bg-warning";
 
             html += `<div class="col">
                 <div page-id = "${pageID}" class="card card_listener">
@@ -48,11 +54,20 @@ $(document).ready(() => {
 
                             <!-- Botones adicionales de funciones para cada tarjeta  -->
                             <div class="cardBtnsSection">
+                                <!-- Boton Guardar Articulo -->
                                 <button class = "btn btn-warning save_article" type = "button">
                                     <i class="bi bi-star text-white save_article_icon"></i>
                                 </button>
 
-                                <button class = "btn btn-danger" type = "button">
+                                <!-- Boton Añadir a la lista de Comparar Articulo -->
+                                <button 
+                                    attr-url = '${url}'
+                                    attr-title = '${title}'
+                                    attr-price = '${price}'
+                                    attr-page-id = '${pageID}'
+                                    attr-ecommerce = '${ecommerce}'
+                                    attr-image-url = '${imgURL}'
+                                    class = "btn btn-danger btnCompareArt" type = "button">
                                     <i class="bi bi-arrow-left-right text-white"></i>
                                 </button>
                             </div>
@@ -86,6 +101,16 @@ $(document).ready(() => {
             icon.removeClass("bi-star-fill");
             icon.addClass("bi-star");
         }
+    }
+
+    function showOptions()
+    {
+        options.removeClass("d-none");
+    }
+
+    function hideNoDisplayContainer()
+    {
+        noDisplayContent.addClass("d-none");
     }
 
     function saveProduct(ev)
@@ -133,10 +158,23 @@ $(document).ready(() => {
                 processData: false
             })
             .done(d => {
-                if(d.status)
+                if(!d.status)
+                {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error...',
+                        text: d.msg
+                    });
+                }
+                else
                 {
                     toggleSaveButton(ev);
-                    alert("Guardado con exito!");
+
+                    Swal.fire(
+                        'Guardado!',
+                        'Tu articulo se ha guardado correctamente.',
+                        'success'
+                    );
                 }
             })
             .fail(e => {
@@ -161,28 +199,77 @@ $(document).ready(() => {
 
         if(pageID == 0)
         {
-            alert("Seleccione primero un e-commerce!");
+            Swal.fire("Seleccione primero un e-commerce!");
         }
         else if(!instanceID || instanceID == 0)
         {
-            alert("Su sesion ha expirado, porfavor vuelva a iniciar sesion!")
+            Swal.fire("Su sesion ha expirado, porfavor vuelva a iniciar sesion!");
         }
         else
         {
+            let dollarInCop = 0; loading.show();
+
             const params = ["search-product", pageID, instanceID, ecommerce, producto, minPrice, maxPrice, searchSize];
             const result = await scrapper.buscarProductoConFiltros(...params);
-            const data = result.data;
+            let data = result.data;
 
-            console.log(result);
+            //Hay que convertir primero los precios de USD a COP
+            if(ecommerce == "Amazon")
+            {
+                const currency = await convertCurrency(1); dollarInCop = currency.new_amount;
+
+                data = data.map(dt => {
+                    dt.price = Math.round(parseFloat(dt.price) * dollarInCop);
+
+                    return dt;
+                });
+            }
 
             const html = generateHTMLCards(data);
 
             contCards.html(html);
+            
+            showOptions();
+            addCompareEvent();
+            hideNoDisplayContainer();
         }
+
+        loading.hide();
+    }
+
+    function addToCompareList(ev)
+    {
+        const btn = $(ev.currentTarget);
+        const confirmation = confirm("Deseas añadir este articulo a la lista de comparación?");
+
+        if(confirmation)
+        {
+            const url = btn.attr("attr-url");
+            const title = btn.attr("attr-title");
+            const price = parseFloat(btn.attr("attr-price"));
+            const page_id = btn.attr("attr-page-id") | 0;
+            const ecommerce = btn.attr("attr-ecommerce");
+            const image_url = btn.attr("attr-image-url");
+
+            const data = { url, title, price, page_id, ecommerce, image_url };
+
+            compList.push(data);
+        }
+    }
+
+    function addCompareEvent()
+    {
+        $(".btnCompareArt").on("click", addToCompareList);
+    }
+
+    function handleFilterByKeyEvent(ev)
+    {
+        if(ev.keyCode == 0xD) inpBtnFiltrar.click();
     }
 
     function addListeners()
     {
+        $(window).on("keyup", handleFilterByKeyEvent);
         profileAvatar.on("click", menu.toggle);
         menu.navItems.on("click", menu.close);
         inpBtnFiltrar.on("click", filterProducts);

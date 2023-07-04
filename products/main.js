@@ -28,10 +28,22 @@ $(document).ready()
                 data: `id=${encodeURIComponent(id)}`
             })
             .then(d => {
-                alert(d.msg);
-                
-                if(d.status)
+                if(!d.status)
                 {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error...',
+                        text: d.msg
+                    });
+                }
+                else
+                {
+                    Swal.fire(
+                        'Eliminado!',
+                        d.msg,
+                        'success'
+                    );
+
                     const col = $(container).parent();
     
                     col.remove();

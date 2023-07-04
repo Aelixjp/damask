@@ -56,6 +56,6 @@
             </div>
         </div>
 
-        <script src="frameworks/bootstrap-5.1.3/js/bootstrap.bundle.min.js"></script>
+        <script src="/damask/frameworks/bootstrap-5.1.3/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>

@@ -13,7 +13,7 @@ $(document).ready(() => {
 
     btnLogin.on("click", () => {
         if(inpUsername.val().trim() === "" || inpPassword.val().trim() === "")
-            alert("Porfavor rellene todos los campos!");
+            Swal.fire("Porfavor rellene todos los campos!");
         else
         {
             $.ajax({
@@ -23,7 +23,13 @@ $(document).ready(() => {
             })
             .done(d => {
                 if(!d.status)
-                    alert(d.msg);
+                {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error...',
+                        text: d.msg
+                    });
+                }
                 else
                     location.href = "/damask/articles/";
             })

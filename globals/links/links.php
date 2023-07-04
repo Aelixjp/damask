@@ -10,3 +10,4 @@
 <script src="<?= FRAMEWORKS_URL_LOCAL; ?>/jQuery/jQuery.js"></script>
 
 <link rel="stylesheet" href="<?= APP_LOCAL; ?>/styles.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

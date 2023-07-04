@@ -2,7 +2,7 @@
 {
     position: fixed;
     width: 100%;
-    z-index: 10000;
+    z-index: 1000;
 }
 
 .contentBody{
@@ -110,6 +110,29 @@
     font-size: 17px;
     text-align: center;
     margin: 8px auto;
+}
+
+.containerHeaderBtns
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.noDisplayContent
+{
+    margin-top: 18vh;
+    opacity: .7;
+}
+
+.imgNoContent
+{
+    height: 30vh;
+}
+
+.titlePag
+{
+    font-family: 'Pacifico', cursive;
 }
 
 @media screen and (max-width: 1600px) {

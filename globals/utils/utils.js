@@ -1,4 +1,21 @@
-export const serverHost = "localhost";
+export const serverHost = "192.168.0.11";
+
+/**NINJAS API - API KEY */
+const apiKey = "bT0duIXufVVmZQWHv5HbTg==M4kvOnQD9R6uSMEC";
+
+export async function convertCurrency(amount, from = "USD", to = "COP")
+{
+    const url = `https://api.api-ninjas.com/v1/convertcurrency?want=${to}&have=${from}&amount=${amount}`;
+
+    const res = await fetch(url, {
+        method: "GET",
+        headers: { 'X-Api-Key': apiKey}
+    })
+    .then(d => d.json())
+    .catch(e => e);
+
+    return res;
+}
 
 export function checkSecurePassword(password)
 {

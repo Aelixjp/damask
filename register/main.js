@@ -2,7 +2,7 @@ import { checkEmail, checkPasswords, serverHost } from "../globals/utils/utils.j
 
 $(document).ready (() => {
 
-    const btnLogin = $("#btnLogin");
+    const btnRegister = $("#btnLogin");
     const inputName = $("#inpName");
     const inputEmail = $("#inpCorreo");
     const inputUsuario  = $("#inpUsername");
@@ -13,10 +13,10 @@ $(document).ready (() => {
 
     $(window).on("keyup", ev => {
         if(ev.keyCode == 13)
-            btnLogin.click();
+            btnRegister.click();
     });
 
-    btnLogin.click(() => {
+    btnRegister.click(() => {
 
         const name = inputName.val() || "";
         const email = inputEmail.val() || "";
@@ -32,16 +32,20 @@ $(document).ready (() => {
             password.trim()     === "" || 
             passwordConf.trim() === ""
         )
-            alert("Hay campos vacios porfavor verifique!");
+            Swal.fire("Hay campos vacios porfavor verifique!");
         else if(!checkEmail(email))
-            alert("El correo electronico no es valido!");
+            Swal.fire("El correo electronico no es valido!");
         else if(password != passwordConf)
-            alert("Las contraseñas no coinciden!");
+            Swal.fire("Las contraseñas no coinciden!");
         else if(!checkPasswords(password, passwordConf))
-            alert(
-                "La contraseña debe contener minimo un caracter especial, 1 letra mayuscula y minuscula y un numero, " + 
-                "debe ser de minimo 8 caracteres en longitud y maximo 20" 
+        {
+            Swal.fire(
+                "Formato Incorrecto Contraseña",
+                "La contraseña debe contener minimo un caracter especial, 1 letra mayuscula, 1 minuscula y un numero, " + 
+                "debe ser de minimo 8 caracteres en longitud y maximo 20",
+                "question"
             );
+        }
         else
         {
             const body = new FormData();
@@ -60,7 +64,13 @@ $(document).ready (() => {
             })
             .done(d => {
                 if(!d.status)
-                    alert(d.msg);
+                {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error...',
+                        text: d.msg
+                    });
+                }
                 else
                     location.href = "/damask/articles/";
             })
