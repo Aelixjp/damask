@@ -26,6 +26,7 @@
         <link rel="stylesheet" href="<?= LIBRARIES_URL_LOCAL; ?>/bootstrap-icons/font/bootstrap-icons.css">
         <link rel="stylesheet" href="styles.css">
 
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script type="module" src="main.js"></script>
 
         <title>Articles</title>
@@ -34,6 +35,7 @@
     <body class = "bg-light position-relative d-block w-100 h-100">
         <?php require_once "../headers/menu.php"; ?>
         <?php require_once "../components/menu_side/menu_side.php"; ?>
+        <?php require_once "../components/modals/comparar_productos_detalle/index.php"; ?>
         <?php require_once "../components/modals/comparar_productos/index.php"; ?>
         <?php require_once "../components/loader/index.php"; ?>
 
@@ -101,7 +103,7 @@
                         <div class = "container-fluid bussinessCardBody py-4 px-3">
                             <h2 class="titlePag text-center text-decoration-underline my-3 mb-5">Buscar Articulos</h2>
 
-                            <div id = "containerHeaderBtns" class="containerHeaderBtns /*d-none*/ mb-5 mt-4">
+                            <div id = "containerHeaderBtns" class="containerHeaderBtns d-none mb-5 mt-4">
                                 <button type="button" class="btn btn-danger"
                                 data-bs-toggle="modal" data-bs-target="#modalCompProducto">Comparar Productos</button>
                                 

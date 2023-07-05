@@ -48,7 +48,7 @@ $(document).ready()
                 confirmButtonText: 'Eliminar!',
                 cancelButtonColor: '#d33',
                 cancelButtonText: "Cancelar"
-              }).then((result) => {
+            }).then((result) => {
                 if (result.isConfirmed) {
                     const id = container.attr("id").split("_")[1] | 0;
 
@@ -149,6 +149,8 @@ $(document).ready()
         menu.navItems.on("click", menu.close);
         btnMyArticles.on("click", deleteArticle);
         selectEcommerce.on("change", changeEcommerce);
+
+        $(window).on("keyup", ev => ev.keyCode === 0xD ? searchContent(ev) : null);
     }
 
     function init()

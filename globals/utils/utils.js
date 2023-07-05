@@ -1,4 +1,4 @@
-export const serverHost = "localhost";
+export const serverHost = "192.168.0.11";
 
 /**NINJAS API - API KEY */
 const apiKey = "bT0duIXufVVmZQWHv5HbTg==M4kvOnQD9R6uSMEC";

@@ -5,7 +5,7 @@
     <div class="modal-content">
       <div class="modal-header bg-danger text-white text-weight-bold text-center">
         <h1 class="modal-title fs-5 text-decoration-none" id="exampleModalToggleLabel">Comparar productos</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button id="btnModCompClose" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
       <div class="modal-body">
@@ -24,7 +24,8 @@
             <hr>
 
             <div class="cardOperations justify-content-center my-3 mt-4">
-              <button id = "btnCompareProd" class="btn btn-danger">Comparar Productos</button>
+              <button id = "btnCompareProd" class="btn btn-danger"
+              data-bs-toggle="modal" data-bs-target="#modalCompProductoDet">Comparar Productos</button>
             </div>
           </div>
         </div>
