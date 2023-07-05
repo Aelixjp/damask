@@ -6,12 +6,15 @@
 
     $id_usr = $_SESSION["ID"];
     $user_products = getUserProducts($id_usr);
+    $user_products_data = $user_products->getData();
 
     $colors = [
         "bg-primary",
         "bg-danger",
         "bg-warning"
     ];
+
+    $e_commerces = getPages();
 
     setlocale(LC_MONETARY, 'es_CO');
 
@@ -48,8 +51,55 @@
             </div>
 
             <div id = "container-articulos" class="container-fluid content-articulos mx-auto text-center rounded">
-                <div class="row p-4">
-                    <?php foreach($user_products->getData() as $usr_product): ?>
+                <div id = "containerMyArticles" class="row p-4">
+                    <div id = "noContentContainer" class="noContentContainer text-secondary <?= empty($user_products_data) ? '' : 'd-none'; ?>">
+                        <h2 class = "titleNoContent">Empieza guardando algún articulo!</h2>
+                        <p class = "textNoContent">¡Aquí apareceran los articulos que hayas guardado!</p>
+                    </div>
+
+                    <!-- Contenedor de filtros y busqueda -->
+                    <div id = "artFilters" class="artFilters mb-4 <?= empty($user_products_data) ? 'd-none' : ''; ?>">
+                        <!-- Contenedor filtro por e-commerce -->
+                        <div class="filterByEcommerceCont form-group d-flex">
+                            <div class="input-group-append d-inline-block me-5">
+                                <label class="me-3" for="commerceType">Filtrar por e-commerce:</label>
+
+                                <!-- SELECT E-COMMERCE-->
+                                <select name="commerceType" id="commerceType" class = "form-select w-auto d-inline-block">
+                                    <option value="0">Todos</option>
+
+                                    <?php foreach($e_commerces as $page): ?>
+                                        <?php
+                                            $id     = $page["ID"];
+                                            $nombre = $page["nombre"];
+                                            $status = $page["status"];
+                                        ?>
+
+                                        <?php if ($status): ?>
+                                            <option value = "<?= $id; ?>"><?= $nombre; ?></option>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+
+                            <!-- Contenedor barra de busqueda -->
+                            <div class="input-group-append d-flex align-items-center">
+                                <label for="buscarArticulo" class="me-3">Buscar articulo...</label>
+                                <input id ="inpSearch" type="search" name="buscarArticulo" class="form-control border-end-0 rounded-0 rounded-start w-auto" placeholder="Buscar Articulo" aria-label="Buscar Articulo" aria-describedby="basic-addon2">
+
+                                <button id="searchBtn" class="btn btn-primary d-inline-block w-0 rounded-0 rounded-end" type="button">
+                                    <i class = "bi bi-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="noEcommerceFilter" class="noContentContainer text-secondary d-none">
+                        <h2 class = "titleNoContent">Oops!</h2>
+                        <p class = "textNoContent">No hay articulos para mostrar!</p>
+                    </div>
+
+                    <?php foreach($user_products_data as $usr_product): ?>
                         <?php
                             $product_id = $usr_product["ID"];
                             $url_article = $usr_product["url"];
@@ -63,6 +113,7 @@
                             $page_id = $page["ID"];
                             $page_name = $page["nombre"];
                         ?>
+
                         <div class="col-sm-3 mb-3">
                             <div id = "product_<?= $product_id ?>" class="card">
                                 <div class = "cardHead <?= $colors[$page_id - 1]; ?>">

@@ -8,3 +8,15 @@
 {
     opacity: .7;
 }
+
+.btn-abs
+{
+    position: absolute;
+    left: calc(50% - 46px);
+    bottom: 20px;
+}
+
+.cardOperations
+{
+    display: flex;
+}

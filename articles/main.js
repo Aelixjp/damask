@@ -1,3 +1,4 @@
+import ModalCompare from "../components/modals/comparar_productos/index.js";
 import MenuComponent from "../components/menu_side/main.js";
 import LoadingComponent from "../components/loader/main.js";
 import Scrapper from "../classes/Scrapper.js";
@@ -18,9 +19,8 @@ $(document).ready(() => {
 
     const menu = new MenuComponent();
     const loading = new LoadingComponent();
+    const modalCompare = new ModalCompare();
     const scrapper = new Scrapper();
-
-    let compList = [];
 
     function generateHTMLCards(cards)
     {
@@ -168,6 +168,10 @@ $(document).ready(() => {
                 }
                 else
                 {
+                    const productID = d.data.ID;
+
+                    cardContainer.attr("id", `product_${productID}`);
+
                     toggleSaveButton(ev);
 
                     Swal.fire(
@@ -185,6 +189,83 @@ $(document).ready(() => {
 
     }
 
+    function deleteArticle(ev)
+    {
+        const target = $(ev.target);
+        let container;
+
+        if(target.hasClass("save_article"))
+            container = target.parent().parent().parent().parent();
+        else if(target.hasClass("bi-star") || target.hasClass("bi-star-fill"))
+            container = target.parent().parent().parent().parent().parent();
+
+        if(container)
+        {
+            Swal.fire({
+                title: 'Estas seguro que deseas eliminar el articulo de favoritos?',
+                text: "Esta acción no se puede revertir!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Eliminar!',
+                cancelButtonColor: '#d33',
+                cancelButtonText: "Cancelar"
+              }).then((result) => {
+                if (result.isConfirmed) {
+                    const id = container.attr("id").split("_")[1] | 0;
+
+                    $.ajax({
+                        url: `http://${serverHost}/damask/back/products/products.php`,
+                        type: "DELETE",
+                        data: `id=${encodeURIComponent(id)}`
+                    })
+                    .then(d => {
+                        if(!d.status)
+                        {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error...',
+                                text: d.msg
+                            });
+                        }
+                        else
+                        {
+                            Swal.fire(
+                                'Eliminado!',
+                                d.msg,
+                                'success'
+                            );
+
+                            toggleSaveButton(ev);
+                        }
+                    })
+                    .catch(e => {
+                        console.log(e.message);
+                    });
+                }
+            });
+        }
+    }
+
+    function saveOrDeleteProduct(ev)
+    {
+        let btn;
+        const target = $(ev.target);
+
+        if(target.hasClass("save_article"))
+            btn = $(target.children()[0]);
+        else if(target.hasClass("bi-star") || target.hasClass("bi-star-fill"))
+            btn = target;
+
+        if(btn)
+        {
+            if(btn.hasClass("bi-star"))
+                saveProduct(ev);
+            else if(btn.hasClass("bi-star-fill"))
+                deleteArticle(ev);
+        }
+    }
+
     async function filterProducts()
     {
         const ecommerceIndex = inpEcommerce[0].selectedIndex;
@@ -198,13 +279,9 @@ $(document).ready(() => {
         const searchSize = inpSearchSize.val();
 
         if(pageID == 0)
-        {
             Swal.fire("Seleccione primero un e-commerce!");
-        }
         else if(!instanceID || instanceID == 0)
-        {
             Swal.fire("Su sesion ha expirado, porfavor vuelva a iniciar sesion!");
-        }
         else
         {
             let dollarInCop = 0; loading.show();
@@ -240,21 +317,23 @@ $(document).ready(() => {
     function addToCompareList(ev)
     {
         const btn = $(ev.currentTarget);
-        const confirmation = confirm("Deseas añadir este articulo a la lista de comparación?");
+        
+        const url = btn.attr("attr-url");
+        const title = btn.attr("attr-title");
+        const price = parseFloat(btn.attr("attr-price"));
+        const page_id = btn.attr("attr-page-id") | 0;
+        const ecommerce = btn.attr("attr-ecommerce");
+        const image_url = btn.attr("attr-image-url");
 
-        if(confirmation)
-        {
-            const url = btn.attr("attr-url");
-            const title = btn.attr("attr-title");
-            const price = parseFloat(btn.attr("attr-price"));
-            const page_id = btn.attr("attr-page-id") | 0;
-            const ecommerce = btn.attr("attr-ecommerce");
-            const image_url = btn.attr("attr-image-url");
+        const data = { url, title, price, page_id, ecommerce, image_url };
 
-            const data = { url, title, price, page_id, ecommerce, image_url };
+        Swal.fire(
+            'Añadido a la lista!',
+            'Tu articulo se ha añadido a la lista de comparación!',
+            'success'
+        );
 
-            compList.push(data);
-        }
+        modalCompare.pushData(data);
     }
 
     function addCompareEvent()
@@ -273,7 +352,7 @@ $(document).ready(() => {
         profileAvatar.on("click", menu.toggle);
         menu.navItems.on("click", menu.close);
         inpBtnFiltrar.on("click", filterProducts);
-        contCards.on("click", saveProduct);
+        contCards.on("click", saveOrDeleteProduct);
     }
 
     function init()

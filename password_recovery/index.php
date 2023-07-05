@@ -13,6 +13,8 @@
     </head>
     
     <body class="d-block w-100 h-100">
+        <?php require_once __DIR__ . "/../components/loader/index.php"; ?>
+
         <div class="container-fluid d-block w-100 h-100">
             <div class="row h-100">
                 <div class="container-login col-md-5 d-flex flex-column justify-content-start bg-light border-marine">

@@ -138,6 +138,7 @@
 .content-articulos
 {
     width: 96%;
+    border: 6px dashed lightgray;
     background: rgb(232, 232, 232);
 }
 
@@ -145,6 +146,28 @@
 {
     text-align: justify;
     margin-bottom: 30px;
+}
+
+.noContentContainer
+{
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.titleNoContent
+{
+    color: #000;
+    margin-bottom: 20px;
+}
+
+.textNoContent
+{
+    font-size: 20px;
+}
+
+#noEcommerceFilter
+{
+    padding-bottom: 100px;
 }
 
 @media screen and (max-width: 1600px) {

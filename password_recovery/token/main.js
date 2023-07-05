@@ -16,13 +16,15 @@ $(document).ready(() => {
         const passwordConf = inpPasswordConf.val().trim();
 
         if(password === "" || passwordConf === "")
-            alert("Porfavor rellene todos los campos!");
+            Swal.fire("Porfavor rellene todos los campos!", '', 'info')
         else if(password != passwordConf)
-            alert("Las contraseñas no coinciden!");
+            Swal.fire("Las contraseñas no coinciden!", '', 'info')
         else if(!checkPasswords(password, passwordConf))
-            alert(
-                "La contraseña debe contener minimo un caracter especial, 1 letra mayuscula y minuscula y un numero, " + 
-                "debe ser de minimo 8 caracteres en longitud y maximo 20" 
+            Swal.fire(
+                "Formato Incorrecto Contraseña", 
+                "La contraseña debe contener minimo un caracter especial, 1 letra mayuscula, 1 minuscula y un numero, " + 
+                "debe ser de minimo 8 caracteres en longitud y maximo 20", 
+                'info'
             );
         else
         {
@@ -35,10 +37,25 @@ $(document).ready(() => {
                 data: formRecoverPass.serialize() + `&token=${encodeURIComponent(token)}`
             })
             .done(d => {
-                alert(d.msg);
-
-                if(d.status)
-                    location.href = "/damask/";
+                if(!d.status)
+                {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error...',
+                        text: d.msg
+                    });
+                }
+                else
+                {
+                    Swal.fire({
+                        title: d.msg,
+                        icon: 'success',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'OK'
+                    }).then(() => {
+                        location.href = "/damask/";
+                    });
+                }
             })
             .fail(e => {
                 console.log(e);

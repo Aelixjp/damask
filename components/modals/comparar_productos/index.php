@@ -9,9 +9,24 @@
       </div>
 
       <div class="modal-body">
+        <!-- Contenedor que encierra un mensaje para cuando no se han agregado todavia productos -->
         <div id="emptyProducts">
-            <i class="d-block checkIcon bi bi-check-circle text-success"></i>
-            <p class="my-4 text-secondary text-center fst-italic">Aquí apareceran tus productos una vez añadas productos a la lista de comparación...</p>
+          <i class="d-block checkIcon bi bi-check-circle text-success"></i>
+          <p class="my-4 text-secondary text-center fst-italic">Aquí apareceran tus productos una vez añadas productos a la lista de comparación...</p>
+        </div>
+
+        <div class="contProductsComparision container-fluid content-articulos mx-auto text-center rounded">
+          <div id = "contentProductsComp" class="row p-2">
+            
+          </div>
+
+          <div id = "compareProdSection" class="compareProdSection d-none">
+            <hr>
+
+            <div class="cardOperations justify-content-center my-3 mt-4">
+              <button id = "btnCompareProd" class="btn btn-danger">Comparar Productos</button>
+            </div>
+          </div>
         </div>
       </div>
 
