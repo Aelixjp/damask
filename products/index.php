@@ -36,6 +36,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;800&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="styles.css">
 
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script type="module" src="main.js"></script>
 
         <title>Articles</title>
@@ -44,6 +45,8 @@
     <body class = "bg-light position-relative d-block w-100 h-100">
         <?php require_once "../headers/menu.php"; ?>
         <?php require_once "../components/menu_side/menu_side.php"; ?>
+        <?php require_once "../components/modals/comparar_productos_detalle/index.php"; ?>
+        <?php require_once "../components/modals/comparar_productos/index.php"; ?>
 
         <section class="main_content container-fluid px-0 w-100 h-100">
             <div class="row w-100">
@@ -90,6 +93,9 @@
                                 <button id="searchBtn" class="btn btn-primary d-inline-block w-0 rounded-0 rounded-end" type="button">
                                     <i class = "bi bi-search"></i>
                                 </button>
+
+                                <button type="button" class="btn btn-danger ms-5"
+                                data-bs-toggle="modal" data-bs-target="#modalCompProducto">Comparar Productos</button>
                             </div>
                         </div>
                     </div>
@@ -145,7 +151,14 @@
                                                 <i class="bi bi-star-fill text-white"></i>
                                             </button>
 
-                                            <button class = "btn btn-danger" type = "button">
+                                            <button
+                                                attr-url = '<?= $url_article; ?>'
+                                                attr-title = '<?= $nombre_article; ?>'
+                                                attr-price = '<?= $precio_article; ?>'
+                                                attr-page-id = '<?= $page_id; ?>'
+                                                attr-ecommerce = '<?= $page_name; ?>'
+                                                attr-image-url = '<?= $imagen_article; ?>' 
+                                                class = "btn btn-danger btnCompareArt" type = "button">
                                                 <i class="bi bi-arrow-left-right text-white"></i>
                                             </button>
                                         </div>
@@ -157,5 +170,7 @@
                 </div>
             </div>
         </section>
+
+        <script src="/damask/frameworks/bootstrap-5.1.3/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>

@@ -1,4 +1,5 @@
 import MenuComponent from "../components/menu_side/main.js";
+import ModalCompare from "../components/modals/comparar_productos/index.js";
 import { serverHost } from "../globals/utils/utils.js";
 
 $(document).ready()
@@ -14,6 +15,7 @@ $(document).ready()
     const containerMyArticles = $("#containerMyArticles");
  
     const menu = new MenuComponent();
+    const modalCompare = new ModalCompare();
 
     function showNoArticlesFilterEcommerce()
     {
@@ -142,6 +144,28 @@ $(document).ready()
         results.removeClass("d-none");
     }
 
+    function addToCompareList(ev)
+    {
+        const btn = $(ev.currentTarget);
+        
+        const url = btn.attr("attr-url");
+        const title = btn.attr("attr-title");
+        const price = btn.attr("attr-price");
+        const page_id = btn.attr("attr-page-id") | 0;
+        const ecommerce = btn.attr("attr-ecommerce");
+        const image_url = btn.attr("attr-image-url");
+
+        const data = { url, title, price, page_id, ecommerce, image_url };
+
+        Swal.fire(
+            'Añadido a la lista!',
+            'Tu articulo se ha añadido a la lista de comparación!',
+            'success'
+        );
+
+        modalCompare.pushData(data);
+    }
+
     function addListeners()
     {
         searchBtn.on("click", searchContent);
@@ -149,6 +173,8 @@ $(document).ready()
         menu.navItems.on("click", menu.close);
         btnMyArticles.on("click", deleteArticle);
         selectEcommerce.on("change", changeEcommerce);
+
+        $(".btnCompareArt").on("click", addToCompareList);
 
         $(window).on("keyup", ev => ev.keyCode === 0xD ? searchContent(ev) : null);
     }

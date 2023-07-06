@@ -103,19 +103,21 @@
                         <div class = "container-fluid bussinessCardBody py-4 px-3">
                             <h2 class="titlePag text-center text-decoration-underline my-3 mb-5">Buscar Articulos</h2>
 
-                            <div id = "containerHeaderBtns" class="containerHeaderBtns d-none mb-5 mt-4">
+                            <div id = "containerHeaderBtns" class="containerHeaderBtns /*d-none*/ mb-5 mt-4">
                                 <button type="button" class="btn btn-danger"
                                 data-bs-toggle="modal" data-bs-target="#modalCompProducto">Comparar Productos</button>
                                 
                                 <nav id = "mainPag" aria-label="Page navigation example" class="me-5">
                                     <ul class="pagination mb-0">
-                                        <li class="page-item"><a class="page-link" href="#">Anterior</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                        <li class="page-item backPage"><a class="page-link" href="#">Anterior</a></li>
+                                        <li class="page-item active firstPage"><a class="page-link" href="#">1</a></li>
                                         <li class="page-item"><a class="page-link" href="#">2</a></li>
                                         <li class="page-item"><a class="page-link" href="#">3</a></li>
                                         <li class="page-item"><a class="page-link" href="#">...</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">50</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">Siguiente</a></li>
+                                        <li class="page-item lastPage"><a class="page-link" href="#">50</a></li>
+                                        <li class="page-item nextPage"><a class="page-link" href="#">Siguiente</a></li>
+
+                                        <input type="number" id="inpPagination" name="inpPagination" value = "1"  class="d-none">
                                     </ul>
                                 </nav>
                             </div>

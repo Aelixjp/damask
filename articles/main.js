@@ -6,6 +6,7 @@ import { convertCurrency, serverHost } from "../globals/utils/utils.js";
 
 $(document).ready(() => {
     const options          = $("#containerHeaderBtns");
+    const page_items       = $(".page-item"          );
     const contCards        = $("#contCards"          );
     const usrIdInput       = $("#usr_id"             );
     const inpProducto      = $("#buscarProducto"     );
@@ -16,6 +17,7 @@ $(document).ready(() => {
     const profileAvatar    = $("#avatarImg"          );
     const inpBtnFiltrar    = $("#btnFiltrar"         );
     const noDisplayContent = $("#noDisplayContent"   );
+    const inpPag           = $("#inpPagination"      );
 
     const menu = new MenuComponent();
     const loading = new LoadingComponent();
@@ -270,13 +272,14 @@ $(document).ready(() => {
     {
         const ecommerceIndex = inpEcommerce[0].selectedIndex;
         
-        const pageID     = inpEcommerce.val();
-        const instanceID = usrIdInput.val();
-        const ecommerce  = pageID > 0 ? $(inpEcommerce.children()[ecommerceIndex]).text() : "";
-        const producto   = inpProducto.val();
-        const minPrice   = inpMinPrecio.val() | 0;
-        const maxPrice   = inpMaxPrecio.val() | 0;
-        const searchSize = inpSearchSize.val();
+        const pageID        = inpEcommerce.val();
+        const instanceID    = usrIdInput.val();
+        const ecommerce     = pageID > 0 ? $(inpEcommerce.children()[ecommerceIndex]).text() : "";
+        const producto      = inpProducto.val();
+        const minPrice      = inpMinPrecio.val() | 0;
+        const maxPrice      = inpMaxPrecio.val() | 0;
+        const searchSize    = inpSearchSize.val();
+        const pagNavigation = inpPag.val();
 
         if(pageID == 0)
             Swal.fire("Seleccione primero un e-commerce!");
@@ -286,7 +289,7 @@ $(document).ready(() => {
         {
             let dollarInCop = 0; loading.show();
 
-            const params = ["search-product", pageID, instanceID, ecommerce, producto, minPrice, maxPrice, searchSize];
+            const params = ["search-product", pageID, instanceID, ecommerce, producto, minPrice, maxPrice, pagNavigation, searchSize];
             const result = await scrapper.buscarProductoConFiltros(...params);
             let data = result.data;
 
@@ -346,6 +349,41 @@ $(document).ready(() => {
         if(ev.keyCode == 0xD) inpBtnFiltrar.click();
     }
 
+    function setActivePage(ev)
+    {
+        const page = $(ev.currentTarget);
+        const isBackPage = page.hasClass("backPage");
+        const isNextPage  = page.hasClass("nextPage");
+
+        const currPageActive = $($(".page-item.active")[0]);
+
+        const isFirstPage = currPageActive.hasClass("firstPage");
+        const isLastPage  = currPageActive.hasClass("lastPage");
+
+        if(isBackPage)
+        {
+            if(!isFirstPage)
+            {
+                const previous = currPageActive[0].previousElementSibling; previous.click();
+            }
+        }
+        else if(isNextPage)
+        {
+            if(!isLastPage)
+            {
+                const next = currPageActive[0].nextElementSibling; next.click();
+            }
+        }
+        else
+        {
+            currPageActive.removeClass("active");
+            page.addClass("active");
+
+            inpPag.val(page.children()[0].textContent | 0);
+            filterProducts();
+        }
+    }
+
     function addListeners()
     {
         $(window).on("keyup", handleFilterByKeyEvent);
@@ -353,6 +391,7 @@ $(document).ready(() => {
         menu.navItems.on("click", menu.close);
         inpBtnFiltrar.on("click", filterProducts);
         contCards.on("click", saveOrDeleteProduct);
+        page_items.on("click", setActivePage)
     }
 
     function init()

@@ -57,7 +57,7 @@ export default class ModalCompareDetails
 
     renderLower = () =>
     {
-        const prices = this.#data.map(d => d.price);
+        const prices = this.#data.map(d => Math.round(d.price));
         const index  = prices.indexOf(Math.min(...prices));
 
         this.#lowerPrice.html(this.getHTML(this.#data[index]));
@@ -65,7 +65,7 @@ export default class ModalCompareDetails
 
     renderHigher = () =>
     {
-        const prices = this.#data.map(d => d.price);
+        const prices = this.#data.map(d => Math.round(d.price));
         const index  = prices.indexOf(Math.max(...prices));
 
         this.#higherPrice.html(this.getHTML(this.#data[index]));
@@ -77,7 +77,7 @@ export default class ModalCompareDetails
         this.#charStadistic = $("#chartStadistic");
 
         const texts = this.#data.map(d => d.title.slice(0, 13));
-        const pricesSorted = this.#data.map(d => d.price).sort();
+        const pricesSorted = this.#data.map(d => Math.round(d.price)).sort();
 
         new Chart(this.#charStadistic, {
             type: 'bar',

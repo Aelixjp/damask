@@ -2,7 +2,7 @@
 {
     position: fixed;
     width: 100%;
-    z-index: 10000;
+    z-index: 10;
     top: 0;
 }
 
@@ -135,7 +135,7 @@
     margin-bottom: 25px;
 }
 
-.content-articulos
+.main_content .content-articulos
 {
     width: 96%;
     border: 6px dashed lightgray;
